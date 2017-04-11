@@ -1,0 +1,1265 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>reveal.js</title>
+
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/black.css">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <!--    intro-->
+      <section class="center">
+        <h2>Introduction to JavaScript</h2>
+        <h4>Day 1: JavaScript Fundamentals</h4>
+      </section>
+      <section>
+        <h2>Who's This Guy?</h2>
+        <h4>Scott C. Reynolds</h4>
+        <ul>
+          <li class="fragment fade-up">Developer/Team Leader for a real long time</li>
+          <li class="fragment fade-up">Prone to tangents and rants, feel free to interrupt</li>
+          <li class="fragment fade-up">Remembers when you couldn't do anything cool with JavaScript and is salty about it</li>
+          <li class="fragment fade-up">Does not love JavaScript (but loves its power)</li>
+        </ul>
+      </section>
+      <section>
+        <h1>Course Objectives</h1>
+        <ul>
+          <li class="fragment">Learn what can be done with JavaScript</li>
+          <li class="fragment">Be comfortable reading and writing basic JavaScript</li>
+          <li class="fragment">Be exposed to advanced JavaScript language features so they aren't scary</li>
+          <li class="fragment">Learn how to use JavaScript libraries</li>
+          <li class="fragment">Learn to interact with APIs</li>
+          <li class="fragment">Learn to use JavaScript on the server</li>
+          <li class="fragment">Learn to use JavaScript to create Spark bots</li>
+        </ul>
+      </section>
+      <section>
+        <h1>Tools</h1>
+        <ul>
+          <li class="fragment">Text Editor (Brackets)</li>
+          <li class="fragment">Browser with Dev Tools (Google Chrome)</li>
+          <li class="fragment">REPL (repl.it)</li>
+          <br>
+          <li class="fragment">Later we'll add other tools as we explore more advanced topics (Postman, ngrok, node)</li>
+          <aside class="notes">If needed, take time to install and set up the main tools.</aside>
+        </ul>
+      </section>
+      <section>
+        <h2>JavaScript Resources</h2>
+        <ul>TODO: url for resource page
+          <li class="fragment">Mozilla Developer Network (MDN)</li>
+          <li class="fragment">StackOverflow</li>
+          <li class="fragment">JavaScript Weekly</li>
+        </ul>
+      </section>
+      <section>
+        <h2>A Brief History of Javascript</h2>
+        <ul>
+          <li class="fragment">1995 - Brendan Eich at Netscape creates JavaScript in 10 days</li>
+          <li class="fragment">1996 - Microsoft implements JScript for IE 3, kicking off our long national nightmare</li>
+          <li class="fragment">1997 - DHTML in IE4 and Netscape Navigator 4</li>
+          <li class="fragment">2005 - AJAX brings "Web 2.0" to reality. JavaScript goes from "toy" to real deal.</li>
+          <li class="fragment">2006 - John Resig releases jQuery, we finally get productive with JavaScript</li>
+          <li class="fragment">2009 - Ryan Dahl creates Node.js, server-side js goes mainstream</li>
+        </ul>
+        <aside class="notes">
+          <ul>
+            <li>First mocha, then livescript, then they got TM from Sun</li>
+            <li>also vbscript sigh - this is the root of all evil</li>
+            <li>spent almost 10 years just mired in browser wars and standards battles and moving things around in clunky ways</li>
+            <li>lots of other frameworks too. js is a framework wild west</li>
+            <li>Netscape had a JS server in 1996 but nobody's ever heard of it.</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <h2>ES6</h2>
+        <p>ECMAScript 6/ECMAScript 2015 is a new specification and the first update to JavaScript since ES5 was standardized in 2009. Brings a ton of great stuff to JS.</p>
+        <ul>
+          <li class="fragment">Arrow Functions</li>
+          <li class="fragment">True classes</li>
+          <li class="fragment">String interpolation</li>
+          <li class="fragment">let/const</li>
+          <li class="fragment">iterators</li>
+          <li class="fragment">promises</li>
+        </ul>
+        <aside class="notes">We'll use ES6 features in bots and touch on most of these but it's not all fully supported in browser stuff yet so we'll stick to supported features.</aside>
+      </section>
+      <section>
+        <h2>What is JavaScript?</h2>
+        <ul>
+          <li class="fragment">It ain't Java</li>
+          <li class="fragment">Scripting language - interpreted not compiled</li>
+          <li class="fragment">Object-oriented</li>
+          <li class="fragment">De facto standard client-side language</li>
+          <li class="fragment">De facto standard for API communication</li>
+        </ul>
+      </section>
+      <section>
+        <h2>What can JavaScript do?</h2>
+        <ul>
+          <li class="fragment">Dynamic, interactive websites</li>
+          <li class="fragment">Games (Google Pac-Man)</li>
+          <li class="fragment">Hybrid and Native Mobile Apps (Ionic/React Native)</li>
+          <li class="fragment">Chat Bots (spark/slack/etc)</li>
+          <li class="fragment">Actual bots (Raspberry Pi/Arduino)</li>
+          <li class="fragment">Performant multi-threaded app server (node)</li>
+          <li class="fragment">This slideshow (Reveal.js)</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Writing and Executing JavaScript</h3>
+        <h4 class="fragment">goodbye world</h4>
+        <p class="left fragment">Open Chrome. Go to any page. Twitter will do if you can't think of anything else.</p>
+        <p class="fragment">Open Dev Tools (right-click -> Inspect) then open the Console tab and type the following:</p>
+        <pre class="fragment">
+           <code>document.removeChild(document.documentElement)</code>
+          </pre>
+      </section>
+      <!--language basics-->
+      <section>
+        <h2>JavaScript Language Fundamentals</h2>
+      </section>
+      <section>
+        <h2>Statements</h2>
+        <p>Each line in JavaScript is an instruction, and each is executed one at a time, in order (try it out in <span style="color: lightblue">repl.it</span>).
+        </p>
+        <pre><code>console.log("hello");</code></pre>
+        <p>Multi-line statements (<em>blocks</em>) are bound by braces</p>
+        <pre><code>if(true) {
+console.log("true!");
+}</code></pre><hr>
+        <pre><code>//this is a comment</code></pre>
+        <pre>
+          <code>
+/* this is a
+   multi-line
+   comment */
+          </code>
+        </pre>
+      </section>
+      <section>
+        <h2>Style guidelines</h2>
+        <ul>
+          <li>use camelCase for multi-word variable names, otherwise lower case</li>
+          <li>open braces on same line</li>
+          <li>upper case/PascalCase for object names</li>
+          <li>descriptive naming always</li>
+          <li>obey Principle of Least Surprise</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Do We Need the Semicolons?</h2>
+        <ul>
+          <li class="fragment">No - ASI handles it (this is why braces on same line)</li>
+          <li class="fragment">Uh, yes, ASI inserts them because they're required</li>
+          <li class="fragment">Definitely when separating statements on the same line (not common, except in for loops)<br><pre><code>for(var i=0; i&lt;10; i++;)</code></pre></li>
+          <li class="fragment">I'm gonna use them because that's how I was raised but sometimes I'll leave them out because people can change</li>
+          <li class="fragment">Follow team/codebase convention</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Variables</h2>
+        <pre class="fragment"><code>var i; //declare variable in local scope</code></pre>
+        <pre class="fragment"><code>i = 0; //initialize variable</code></pre>
+        <pre class="fragment"><code>var i = 0; //declare and init variable</code></pre>
+        <pre class="fragment"><code>let i = 0; //(ES6) declare variable in local scope</code></pre>
+        <pre class="fragment"><code>const i = 0; //(ES6) declare constant in local scope</code></pre>
+        <pre class="fragment"><code>i = 0; //Yikes.</code></pre>
+        <aside class="notes">i=0 not automatically global, goes up chain looking for variable then assigns to global object if not found</aside>
+      </section>
+      <section>
+        <h2>Assignment</h2>
+<pre class="fragment"><code>var i;
+i = "hello";
+console.log(i);
+i = "bye";
+console.log(i);</code></pre>
+<pre class="fragment"><code>let i = "hi";
+console.log(i);
+i = "bye";
+console.log(i);</code></pre>
+<pre class="fragment"><code>const a = "b";
+a = c;
+//const c;</code></pre>
+      </section>
+      <section>
+        <h2>Primitive Data Types</h2>
+        <pre class="fragment"><code>var fruit = "banana"; //string </code></pre>
+        <pre class="fragment"><code>var year = 2017; //number </code></pre>
+        <pre class="fragment"><code>var pi = 3.14; //also number </code></pre>
+        <pre class="fragment"><code>var waterIsWet = true; //boolean (true/false) </code></pre>
+        <pre class="fragment"><code>var pi; //undefined </code></pre>
+        <pre class="fragment"><code>var empty = null;//null - intentionally empty</code></pre>
+      </section>
+      <section>
+        <h4>Try It</h4>
+        <pre>
+        <code>
+        var fruit = "banana";
+        var pi;
+
+        typeof(fruit); // 'string'
+        typeof(pi); // 'undefined'
+
+        pi === undefined; //true
+        pi === null; //false
+        </code>
+        </pre>
+        <pre class="fragment"><code>typeof(Fruit); // ???</code></pre>
+        <aside class="notes">get into conversion for ints/floats/higher data types later. js case-sensitive</aside>
+      </section>
+      <section>
+        <h2>Working with Strings</h2>
+        <h4>Concatenation</h4>
+<pre class="fragment"><code>let firstName = "Scott";
+let lastName = "Reynolds";
+console.log(firstName + lastName);</code></pre>
+        <pre class="fragment"><code>console.log(firstName + ' ' lastName);</code></pre>
+        <pre class="fragment"><code>console.log('My name is ' + firstName + ' ' lastName);</code></pre>
+        <pre class="fragment"><code>console.log('My name is ' + firstName + ' ' lastName +
+        'and I really think pie is better than cake');</code></pre>
+        <p class="fragment">Protip: use variables for better readability:</p>
+        <pre class="fragment"><code>let sentence = 'My name is ' + firstName + ' ' + lastName;
+sentence += 'and I really think pie is better than cake';
+console.log(sentence);
+// there's gotta be a better way!</code></pre>
+      </section>
+      <section>
+        <h2>Working With Strings</h2>
+        <h4>Interpolation with Template Literals (ES6)</h4>
+<pre class="fragment"><code>let firstName = "Scott";
+let lastName = "Reynolds";
+console.log(firstName + lastName);</code></pre>
+        <pre class="fragment"><code>let sentence = `My name is ${lastName},
+        ${firstName} ${lastName}.`</code></pre>
+      </section>
+      <section>
+        <h2>Working with Strings</h2>
+        <h4>Helpful Functions</h4>
+<pre class="fragment"><code>var sentence = "Hi, I'm Scott";
+sentence.indexOf("Scott"); //8 - Why?
+sentence.indexOf("Joe"); // -1
+sentence.includes("Scott"); // ES6</code></pre>
+<pre class="fragment"><code>sentence.replace("Scott", "Joe"); //Hi, I'm Joe
+console.log(sentence); // what will we get?</code></pre>
+        <p class="fragment">Most methods do not alter the original object.</p>
+        <pre class="fragment"><code>let newSentence = sentence.replace("Scott", "Joe");</code></pre>
+      </section>
+      <section>
+        <h2>Working with Strings</h2>
+        <h4>More Helpful Functions</h4>
+<pre class="fragment"><code>let fruit = "Kiwi";
+fruit.length; // 4
+fruit.toLowerCase(); // kiwi
+fruit.toUpperCase(); // KIWI</code></pre>
+<pre class="fragment"><code>let padded = "   weird  ";
+padded.trim(); // "weird"
+padded.trimLeft(); // "weird  "
+padded.trimRight(); // "   weird"
+console.log(padded); // "  weird  "
+
+//remember to assign the result to keep it
+padded = padded.trim();</code></pre>
+      </section>
+      <section>
+        <h2>Working with Strings</h2>
+        <h4>Regular Expressions (regex)</h4>
+        <p>Regex is a common syntax for text processing that is (almost) standardized across different programming languages. The basic syntax is:</p>
+<pre><code>/search text/ //matches literal "search text"
+/\d*/ //matches on zero or more digits
+/\w+/ //matches on one or more word chars</code>
+</pre>
+        <p>See <a href="http://rubular.com">Rubular.com</a> for more.</p>
+      </section>
+      <section>
+        <h2>Working with Strings</h2>
+        <h4>Regex continued</h4>
+<pre class="fragment"><code>var test = "Robin has 5 dogs";
+test.search(/Robin/); // 0
+test.search(/robin/); // -1 - case sensitive
+test.search(/\d+/); // 10 - like what other method?
+var replaced = test.replace(/Robin/, "Victoria");
+</code></pre>
+<pre class="fragment"><code>var email = "joe@aol.com";
+email.search(/\w+@\w+\.\w+/); // 0
+var emailMatcher = /\w+@\w+\.\w+/;
+test.search(emailMatcher); // -1
+</code></pre>
+<pre class="fragment"><code>//use match to retrieve the match
+var matched = test.match(/\d+/); // [5]
+matched = test.match(/\d*/); // [''] test your matchers!
+</code></pre>
+      </section>
+      <section>
+        <h2>Working with Numbers</h2>
+        <h4>Operators</h4>
+<pre><code>1 + 2  // 3
+2 - 4  // -2
+2 * 8  // 16
+10 / 5 // 2
+10 % 2 // 0
+10 % 9 // 1
+2 ** 3 // 8</code></pre>
+        <pre class="fragment"><code>Compound Assignment
+let x = 1;
+let y=2;
+
+x += y; // x = ?
+x -= y; // x = ?
+y *= 2; // y = ?
+y /= 2; // y = ?</code></pre>
+      </section>
+      <section>
+        <h2>Working with Numbers</h2>
+        <h4>Increment/Decrement</h4>
+<pre class="fragment"><code>let x = 1;
+x++;
+console.log(x); // 2
+x--;
+console.log(x); // 1</code></pre>
+<pre class="fragment">Prefix vs Postfix
+<code>
+var x = 3;
+var y = x++; //y = ? x = ?
+
+var a = 2;
+var b = ++a; //b = ? a = ?
+</code></pre>
+        <p class="fragment">We use postfix (x++) in loops to operate on <em>current</em> x
+        and then increment at the end of the iteration.</p>
+      </section>
+      <section>
+        <h2>Type Coercion</h2>
+<pre><code>var a = 2;
+var b = "Barney";
+
+a + b; // implicit coercion
+</code></pre>
+<p class="fragment">Implicit coercion is okay for simple things like string concatenation,
+but when we get into things like booleans, it can be real interesting (horrible).</p>
+<pre class="fragment"><code>var a = 42;
+var b = "3.14";
+
+// Explicit coercion
+String(a);
+Number(c);</code></pre>
+      </section>
+      <section>
+        <h2>Parsing Numbers</h2>
+        <p>Sometimes we need to get a number from a string that can't be coerced reliably.</p>
+        <pre><code>
+        var x = "23 Skidoo";
+        z = Number(x); // NaN
+        z = parseInt(x); // 23
+
+        var y = "3.14 pie";
+        z = parseFloat(y); // 3.14
+        z = ParseInt(y); // ?
+
+        var a = "i ate 23 pies";
+        z = parseInt(a); // ?
+        </code></pre>
+      </section>
+      <section>
+        <h2>Working with Dates</h2>
+        <pre><code>        var someDate = new Date();
+        someDate = new Date("4/24/2017");
+        someDate = new Date(2017,4,24); // what happens?
+
+        someDate.getDate();
+        someDate.getMonth();
+
+        var d = Date.parse("4/24/2017"); //ms since 1/1/70
+        d = Date.parse("April 24 2017");
+        d.getDate(); //???
+        typeof(d);
+
+        d = new Date(d);
+        d.toString();
+        d.toDateString();
+
+        </code></pre>
+      </section>
+      <section>
+        <h2>Working with Booleans</h2>
+        <h4>Boolean Expressions</h4>
+        <pre><code>
+        1 === 1; // true
+        1 === 2; // false
+        1 !== 2; // true
+
+        1 &lt;= 2; // true
+        1 &gt; 2; // false
+
+        "hi" === "bye"; // false
+        "hi" === "HI"; // false
+
+        (true);
+        (false);
+        </code></pre>
+      </section>
+      <section>
+        <h2>Working with Booleans</h2>
+        <h4>Truthy and Falsy</h4>
+        <p>In the previous example, why did we use === ("triple equals") when most other languages use == (double-equals)?</p>
+        <pre class="fragment"><code>
+        1 == "1"; // remember implicit type coercion?
+        0 == false;
+
+        ' ' == 0;
+        '\n\n\n' == 0;
+        </code>Use triple-equals syntax to avoid surprises!</pre>
+      </section>
+      <section>
+        <h2>Working with Booleans</h2>
+        <h4>Boolean Logic</h4>
+        <pre><code>
+        // && (and) - true if both expressions true
+        1 &gt; 0 && 1 &lt; 2; // true
+
+        // || (or) - true if either expression true
+        1 &gt; 0 || 1 &gt; 2; // true
+
+        // ! - negation
+        !(1 &gt; 0 && 1 &lt; 2); // false
+        </code>Negation is valid but usually can be rewritten
+to be more readable.</pre>
+      </section>
+      <section>
+        <h2>Making Decisions</h2>
+        <h4>if/else</h4>
+        <pre><code>
+        let a = 2;
+
+        if(a > 2) {
+          console.log("more than two!");
+        } else {
+          console.log("less than or equal to two");
+        }
+        </code></pre>
+      </section>
+      <section>
+        <h2>Making Decisions</h2>
+        <h4>if/else if</h4>
+        <pre><code>
+        let a = 2;
+
+        if(a > 2) {
+          console.log("more than two!");
+        } else if(a === 2) {
+          console.log("equals two");
+        } else {
+          console.log("less than two");
+        }
+        </code></pre>
+      </section>
+      <section>
+        <h2>Making Decisions</h2>
+        <h4>Switch</h4>
+<pre class="fragment"><code>if(x === y) {
+  // do something
+} else if (x === z) {
+  // do something else
+} else if (x === a) {
+  // do a third thing
+} //antipattern!</code></pre>
+<pre class="fragment"><code>var mood = "hungry";
+switch(mood) {
+  case "happy":
+    console.log("Great day! Have ice cream!");
+    break;
+  case "sad":
+    console.log("Bad day. Have ice cream.");
+    break;
+  case "hungry":
+    console.log("Eat something! I suggest ice cream.");
+    break;
+  default:
+    console.log("you know what to do");
+ }</code></pre>
+      </section>
+      <section>
+        <h2>Arrays</h2>
+        <ul>
+          <li class="fragment">Data structure that represents a list.</li>
+          <li class="fragment">Ordered data. Stored in the order of addition.</li>
+          <li class="fragment">Indexed data. Accessed by position. Zero-based.</li>
+          <li class="fragment">Can store any other type, and mixed types.</li>
+        </ul>
+<pre class="fragment"><code>var myArray = []; // create new empty array
+var myArray = ["hi","bye",1,[2,3]] // create array with elements.
+myArray[0]; // "hi"
+myArray.length; // 4
+myArray[3].length; // 2
+myArray[1].length; // why?</code></pre>
+      </section>
+      <section>
+        <h2>Array Operations</h2>
+        <h4>Adding and Removing Items</h4>
+        <pre class="fragment">
+<code>let arr = [1,2];
+
+arr.push(3); // add element to end of array
+console.log(arr); // [1,2,3] most array methods alter the array
+
+var i = arr.pop(); // remove (and return) last item
+arr.shift(); // remove first item, shift everything left
+arr.unshift(1); // add item to front of array
+
+arr[0] = 4; // replace item at index 4
+arr[4] = "hi"; // what happens at arr[3]?
+
+arr.splice(1,0,"inserted"); // insert "inserted" at index 1
+arr.splice(4,1); // remove 1 item starting at index 4
+</code></pre>
+      </section>
+      <section>
+        <h2>Array Operations</h2>
+        <h4>Manipulating Arrays</h4>
+        <pre class="fragment">
+        <code>
+        let arr = ["one", "two"];
+
+        arr.reverse();
+        arr.indexOf("two"); // 0 because we reversed it!
+
+        arr.includes("two"); // ES6
+        arr.indexOf("three") >= 0; // false
+
+        let arrStr = "three,four,five";
+        arr = arrStr.split(','); // ["three", "four", "five"]
+        newStr = arr.join(':'); // "three:four:five"
+        </code>
+        </pre>
+      </section>
+      <section>
+        <h4>Array Practice</h4>
+        <ul>
+          <li>Initialize an array with the 8 planets of the solar system in order.</li>
+          <li>Add Pluto because you're not a monster.</li>
+          <li>Add Ceres between Mars and Jupiter.</li>
+          <li>Add the Sun to the beginning.</li>
+          <li>Remove Pluto from the end and add it to a new array of Dwarf Planets with Makemake and Haumea.</li>
+          <li>Add the array of dwarf planets to the end of the solar system array.</li>
+          <li>Find the position of Earth.</li>
+        </ul>
+      </section>
+      <section>
+        <h4>Array Practice Solution</h4>
+        <pre><code>
+let solarSystem = ["Mercury","Venus","Earth","Mars",
+              "Jupiter","Saturn","Uranus","Neptune"];
+solarSystem.push("Pluto");
+solarSystem.splice(4,0,"Ceres");
+solarSystem.unshift("Sun");
+let dwarfPlanets = [solarSystem.pop(),"Makemake","Haumea"];
+solarSystem.push(dwarfPlanets);
+solarSystem.indexOf("Earth");
+        </code></pre>
+      </section>
+      <section>
+        <h2>Loops</h2>
+        <p>Why do we use loops?</p>
+        <ul>
+          <li class="fragment">Performing an action a specific number of times.</li>
+          <li class="fragment">Performing an action until a condition is met.</li>
+          <li class="fragment">Iterating over the items of a collection and performing an action on each one.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Loops</h2>
+        <h4>while...</h4>
+        <p>You can think of a <code>while</code> loop as an <code>if</code> statement that repeats while it returns true. Useful when we can't predict the number of loops we need to execute.</p>
+        <pre class="fragment">
+        <code>
+        var now = Date.now();
+        while(now % 2 !== 0) {
+          console.log("not yet");
+          now = Date.now();
+        }
+        </code></pre>
+      </section>
+      <section>
+        <h2>Loops</h2>
+        <h4>do...while</h4>
+        <p><code>do...while</code> loops are similar to <code>while</code> loops except the condition is evaluated after the loop body, meaning the loop will always execute at least once.</p>
+        <pre class="fragment"><code>
+        var test = false;
+        while(test) {
+          console.log("this will never execute");
+        }
+
+        do {
+          console.log("but this will execute once");
+        } while(test);</code>
+        </pre>
+      </section>
+      <section>
+        <h2>Loops</h2>
+        <h4>for...</h4>
+        <p>The <code>for</code> loop is your bread and butter. Used to iterate a finite number of times based on a condition such as a number of items in a collection.</p>
+        <pre class="fragment"><code>
+        var p = ["Red","Yellow","Blue"];
+
+        for (let i=0; i &lt; p.length; i++) {
+          console.log(p[i]);
+        }
+        </code></pre>
+        <aside class="notes">Note semicolon use, initialization, i standard for iterator</aside>
+      </section>
+      <section>
+      </section>
+      <section>
+        <h2>Executing in the Browser</h2>
+        <p>The browser is the easiest and most common way of executing interactive client-side JavaScript.</p>
+        <pre class="fragment"><code>&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;script type="text/javascript"&gt;
+  console.log('this is inline js');
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      </section>
+      <section>
+        <h2>Linking External Code Files</h2>
+        <pre class="fragment"><code>&lt;head&gt;
+  &lt;script src="class.js"&gt;&lt;/script&gt;
+&lt;/head&gt;</code></pre>
+        <pre class="fragment"><code>
+        //inside class.js
+        console.log("and this is linked javascript");
+        </code></pre>
+        <p class="fragment">Any time you need to use an external library or maintain a non-trivial amount of code, you'll be linking separate files. Inline js is used sparingly.</p>
+        <aside class="notes">order of execution and linking is important.</aside>
+      </section>
+      <section>
+        <h2>Basic Interactivity</h2>
+        <p>Alerts and prompts can be quick and easy ways to collect and display data in the browser.</p>
+        <h4 class="fragment">Try It</h4>
+        <pre class="fragment"><code>
+          // class.js
+          let answer = prompt("Hey, what's your name?");
+          alert(answer);
+        </code></pre>
+      </section>
+      <section>
+        <h2>Exercises</h2>
+        <h4>Convert Celsius to Farenheit</h4>
+        <p>Write a program that prompts for a temperature in celsius and alerts the temperature converted to farenheit.</p>
+        <pre class="fragment"><code>var celsius = prompt("Enter a temperature in celsius")
+var farenheit = celsius * 9 / 5 + 32;
+var message = `${celsius} celsius is ${farenheit} farenheit`;
+alert(message);</code></pre>
+      </section>
+      <section>
+        <h4>Favorite Color</h4>
+        <p>Prompt for a person's favorite color. Create an array of the colors of the rainbow in standard <em>ROYGBIV</em> order. Respond with the position (index) of their favorite color in the rainbow, or, if their favorite color isn't in the rainbow, a message telling them so.</p>
+        <pre class="fragment"><code>let fave = prompt("What is your favorite color?");
+let rainbow = ["red","orange","yellow","green","blue",
+    "indigo","violet"];
+let position = rainbow.indexOf(fave.toLowerCase());
+if(position === -1) {
+  alert(fave + " isn't in the rainbow");
+} else {
+  alert(fave + " is  number " + String(position + 1));
+}</code></pre>
+      </section>
+      <!--                intermediate language-->
+      <section>
+        <h2>Intermediate JavaScript</h2>
+        <ul>
+          <li class="fragment">Functions</li>
+          <li class="fragment">Objects</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Functions</h2>
+        <p>Functions are reusable chunks of code that can be called by other code.</p>
+        <pre><code>
+        function sayHi() {
+          console.log("hi");
+        }
+
+        sayHi();
+        </code></pre>
+      </section>
+      <section>
+        <h2>Function Arguments</h2>
+        <p>Functions can be called with data, or arguments, that are used in the execution of the function.</p>
+        <pre><code>        function sayHi(name) {
+          console.log("hi " + name);
+        }
+
+        sayHi("Scott");</code></pre>
+        <pre class="fragment"><code>function addNumbers(num1, num2) {
+  let result = num1 + num2;
+  console.log(result);
+}
+
+addNumbers(3,4);
+addNumbers("scott",3); // what happens?</code></pre>
+      </section>
+      <section>
+        <h2>Function Return Values</h2>
+        <p>Functions can return a (single) value.</p>
+        <pre><code>function addNumbers(num1, num2) {
+  let result = num1 + num2;
+  return result; //once we return, we're done
+  console.log("will never happen");
+}
+let sum = addNumbers(5,6);
+console.log("sum");
+        </code></pre>
+      </section>
+      <section>
+        <h2>Fun(ctions)</h2>
+        <h4>Default Parameters</h4>
+        <pre class="fragment"><code>function multiply(x,y) {
+  return x * y
+}
+multiply(4); //why no error?</code></pre>
+        <pre class="fragment"><code>function multiply(x,y) {
+  if(y === undefined || !typeof(y) === Number) {
+      y = 1;
+  }
+  return x * y
+}
+multiply(4);</code></pre>
+        <pre class="fragment"><code>function multiply(x,y=1) {
+  return x * y
+}
+multiply(4);</code></pre>
+      </section>
+      <section>
+        <h2>Fun(ctions)</h2>
+        <h4>arguments object and rest parameter</h4>
+        <pre class="fragment"><code>function rest(x) {
+  console.log(arguments); //all arguments and system stuff
+}
+rest(1,2,3,4,5)
+rest(1)</code></pre>
+        <pre class="fragment"><code>function rest(x, ...myArgs) {
+  console.log(myArgs); // just the extra arguments as array
+}
+rest(1,2,3,4,5)</code></pre>
+      </section>
+      <section>
+        <h2>Variable Scope</h2>
+        <p>Variables in JavaScript are <em>scoped</em>, or available, at the level at which they are declared and anywhere that can access that scope.</p>
+        <pre class="fragment"><code>var outer = "outside"; // "global scope"
+function testScope() { // also global scope
+  console.log(outer);
+  outer = "inside" // be careful of side effects!
+}
+testScope();
+console.log(outer);</code></pre>
+      </section>
+      <section>
+        <h4>Function Scope vs Block Scope</h4>
+        <pre class="fragment"><code>function testScope() {
+  var inner = "inside"
+  console.log(inner);
+}
+testScope();
+console.log(inner); //can't get there</code></pre>
+        <pre class="fragment"><code>function testScope() {
+  if(true) {
+    var varBlock = "var in block";
+    let letBlock = "let in block";
+  }
+  console.log(varBlock);
+  console.log(letBlock); //can't get there
+}
+testScope();</code></pre>
+      </section>
+      <section>
+        <h2>Function Practice</h2>
+        <h4>FizzBuzz</h4>
+        <p>Prompt the user for a number. Create a function called FizzBuzz() that takes the user's number as an argument and prints every number from one to that number to the console log.</p>
+        <p>TWIST: if the number is a multiple of 3, it prints "Fizz" instead of the number. If the number is a multiple of 5, print "Buzz" rather than the number. If it's a multiple of 3 and 5, print "FizzBuzz".</p>
+      </section>
+      <section>
+        <h4>FizzBuzz Solution</h4>
+        <pre class="fragment"><code>function FizzBuzz(upperBound) {
+  var output;
+  for(var i=1;i&lt;=upperBound;i++){
+    output = ''
+    if(i%3 === 0){
+      output+='Fizz';
+    }
+    if(i%5 === 0){
+      output+='Buzz';
+    }
+    if(output === '') {
+      output+=i;
+    }
+    console.log(output);
+  }
+}
+var input = prompt("Enter a number");
+FizzBuzz(input);
+</code></pre>
+      </section>
+      <section>
+        <h2>Objects</h2>
+        <p>JavaScript is an <em>object-oriented (OO)</em> language. Objects are special data structures that allow us to encapsulate <em>data (properties)</em> and <em>behavior (methods)</em>.</p>
+        <p>Objects are generally designed to represent a cohesive concept, sometimes logical, sometimes physical. JavaScript provides some objects for us, and the ability to make our own.</p>
+        <pre class="fragment"><code>var d = new Date(); //create instance with new keyword</code></pre>
+      </section>
+      <section>
+        <h2>Properties</h2>
+        <p>A <em>property</em> represents data or an attribute, related to an object.</p>
+        <ul>
+          <li class="fragment">Object: Car. Properties: Color, Transmission, DoorCount, Engine.</li>
+          <li class="fragment">Object: Polygon. Properties: Sides, Position, Area, Perimeter</li>
+          <li class="fragment">Object: Side. Properties: Length</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Methods</h2>
+        <p>A <em>method</em> is a function that describes the behavior of an object.</p>
+        <ul>
+          <li class="fragment">Object: Car. Methods: Unlock, Lock, Start, Drive</li>
+          <li class="fragment">Object: Polygon, Properties: Move(coords), Fill(color)</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Creating Objects</h2>
+        <h4>Literal Constructor</h4>
+        <pre><code>var car = {}; //that's it</code></pre>
+        <pre><code>var car = {color: "red"};
+car.color; //dot notation
+car["color"]; //bracket notation
+//why?? objects are key/value pairs. keys are strings</code></pre>
+        <h4>Object Constructor</h4>
+        <pre><code>var car = new Object();</code></pre>
+        <pre><code>var car = new Object({color: "red"});</code></pre>
+      </section>
+      <section>
+        <h2>Manipulating Objects</h2>
+        <pre><code>// objects are open to manipulation at runtime
+        var car = {};
+        car.color = "Red";
+        car.engine = "V8";
+        car.doors = 2;
+
+        console.log(car);
+        car.color = "Black";
+        console.log(car.color);
+        delete car.color;
+        console.log(car);
+        </code></pre>
+      </section>
+      <section>
+        <h2>Object Methods</h2>
+        <pre><code>var car = {color: red};
+car.start = function() {
+  console.log("vroom");
+}
+car.start();
+
+//functions are... data?
+console.log(car);
+var func = function() {console.log("yep")}
+func();
+
+//functions are... OBJECTS!!
+typeof(car.start);
+car.start.thisIsWeird = "yep"
+console.log(car.start.thisIsWeird); //but like, don't.
+        </code></pre>
+      </section>
+      <section>
+        <h2>Namespaces</h2>
+        <p>Namespacing allows you to encapsulate an object/objects within a named scope to organize and avoid collissions. You'll run into this with third party libraries like jQuery, and it's good practice when making your own libraries.</p>
+        <pre><code>var JavascriptClass = { //just a top-level object
+  car: {color: "red"} // where the properties are objects
+}
+var SomeBadClass = {
+  car: {color: "rusty and bad"}
+}
+console.log(JavascriptClass.car);
+console.log(SomeBadClass.car);
+        </code></pre>
+      </section>
+      <section>
+        <h4>Objects vs Arrays Quiz</h4>
+        <ul>
+          <li class="fragment">If you want to store a number of data elements in order, which do you use?</li>
+          <li class="fragment">True/False: All elements in an array must be the same type.</li>
+          <li class="fragment">What data type are all object keys?</li>
+          <li class="fragment">True/False: You must define all of an object's properties when you create it.</li>
+          <li class="fragment">If you had an object that represented a director, how would you store that director's movies?</li>
+          <li class="fragment">How would you store a bunch of director objects?</li>
+        </ul>
+      </section>
+      <section>
+        <h4>Constructor Functions</h4>
+        <p>The real power of objects is in the ability to define them generically and reuse them, such as the <code>Date</code> object.</p>
+        <pre><code>// by convention, constructor functions are upper case
+function Car(color, make, model, doors){
+  this.color = color; // this = the instance when new is used
+  this.make = make;
+  this.model = model;
+  this.doors = doors;
+  this.engine = ""; // define something to be assigned later
+  this.start = function() {
+    console.log("vroom");
+  }
+}
+var corvette = new Car("Red", "Chevy", "Corvette", 2);
+console.log(corvette);
+corvette.start();
+        </code></pre>
+      </section>
+      <section>
+        <h4>Object Lab</h4>
+        <ul>
+          <li>Use a constructor function to define a <code>Book</code> object with properties Title and Author.</li>
+          <li>Define a <code>Bookworm</code> object with a Name and a collection of books that the bookworm wants to read.</li>
+          <li>Add a method to the Bookworm to print all the book titles they want to read.</li>
+          <li>Prompt for the Bookworm's name, then instantiate a new Bookworm object and assign 3 books.</li>
+          <li>Call the method to print the list of book titles to read.</li>
+        </ul>
+      </section>
+      <section>
+        <h4>Object Lab Solution</h4>
+        <pre><code>function Book(title, author) {
+  this.title = title;
+  this.author = author;
+}
+function Bookworm(name) {
+  this.name = name;
+  this.bookList = [];
+  this.printBooks = function() {
+    for(let i=0;i&lt;this.bookList.length;i++) {
+      console.log(this.bookList[i].title);
+    }
+  }
+}
+
+let bookworm = new Bookworm(prompt("What is your name?"));
+bookworm.bookList.push(new Book("1984", "George Orwell"));
+bookworm.bookList.push(new Book("Choke", "Pahlaniuk"));
+bookworm.printBooks();
+        </code></pre>
+      </section>
+      <!--                JavaScript on the Web-->
+      <section>
+        <h2>JavaScript on the Web</h2>
+        <p>JavaScript is still primarily used to manipulate web pages. It's often thought of as a "front-end" or "client-side" technology, though, with Node, it's a legitimate server-side language as well.</p>
+      </section>
+      <section>
+        <h4>HTML/CSS Review</h4>
+        <pre><code>&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;A VERY simple page&lt;/title&gt;
+  &lt;style&gt;
+    .someStyle {
+      background-color: blue;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="uniqueId"&gt;I'm the Inner Text of Div uniqueid&lt;/div&gt;
+  &lt;div class="someStyle"&gt;This is all Inner HTML of Body&lt;/div&gt;
+  &lt;!-- "class" and "id" are ATTRIBUTES of their elements --&gt;
+  &lt;!-- when possible load scripts at end of body
+  so they don't block page rendering --&gt;
+  &lt;script src="class.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      </section>
+      <section>
+        <h2>The DOM</h2>
+        <ul>
+          <li class="presentation">DOM - Document Object Model</li>
+          <li class="presentation">Browser exposes <em>objects</em> that represent the HTML structure of the page.</li>
+          <li class="presentation">Document -> Node -> Properties</li>
+          <li class="presentation">Common Node Properties: parentNode, childNodes, prevSibling, nextSibling</li>
+          <li class="presentation">In Chrome/Firefox - Open Page -> Right Click -> Inspect Element</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Navigating the DOM</h2>
+        <pre><code>
+        console.log(document.body);
+        console.log(document.body.parentNode);
+        console.log(document);
+
+        for (var i = 0; i&lt;document.body.childNodes.length; i++) {
+          console.log(document.body.childNodes[i]);
+        }
+        </code></pre>
+      </section>
+      <section>
+        <h2>Selectors</h2>
+        <pre><code><div id="findMe">Hi</div>
+<div class="nav">Div 1</div>
+<div class="nav">Div 2</div></code></pre>
+        <pre><code>var div = document.getElementById('findMe');
+var divs = document.getElementsByTagName('div');
+var navs = document.getElementsByClassName('nav');
+
+for(let i=0;i&lt;navs.length;i++){
+  console.log(navs[i]);
+}</code></pre>
+      </section>
+      <section>
+        <h2>Manipulating the DOM</h2>
+        <pre><code>var div = document.getElementById('findMe');
+div.getAttribute('class');
+
+//by principle of least surprise, what's the method
+//to set an attribute?
+</code></pre>
+      <pre class="fragment"><code>div.setAttribute('class', 'nav');</code></pre>
+      <pre class="fragment"><code>div.innerText = 'Bye'; //replaced!
+div.innerHTML += '&lt;p&gt;New Paragraph Element&lt;/p&gt; //appended!</code></pre>
+      </section>
+      <section>
+        <h2>Manipulating the DOM</h2>
+        <pre class="fragment"><code>var newDiv = document.createElement('div');
+newDiv.innerText = "I am a new div!";
+document.body.appendChild(newDiv);</code></pre>
+        <pre class="fragment"><code>var newParagraph = document.createElement('p');
+var paragraphText = document.createTextNode('New Paragraph!');
+newParagraph.appendChild(paragraphText);
+document.body.appendChild(newParagraph);</code></pre>
+      </section>
+      <section>
+        <h2>Events</h2>
+        <ul>
+        <li>Most DOM elements have ways to let us know when a user has taken an action. These are called <em>events.</em></li>
+        <li>Common events are: <code>click</code>, <code>dblclick</code>, <code>mouseover</code>,<code> mouseout</code>, <code>focus</code>, and <code>blur</code></li>
+        <li>A function that responds to an event is called an <em>event listener (or handler)</em>.</li>
+        <li>See MDN for more.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Event Listeners</h2>
+        <pre><code>&lt;div id="findMe" onmouseover="changeDiv()"&gt;Hi&lt;/div&gt;</code></pre>
+        <pre><code>//class.js
+function changeDiv() {
+  var el = document.getElementById('findMe');
+  el.innerText = "Moused Over";
+}</code></pre>
+        <pre class="fragment"><code>&lt;div id="findMe" onmouseover="alert('hi');"&gt;Hi&lt;/div&gt;
+//the value on the event is legit JS code but generally don't.
+        </code></pre>
+      </section>
+      <section>
+        <h2>Unobtrusive Event Listeners</h2>
+        <pre><code>&lt;div class="nav" onmouseover="changeNav();"&gt;Div 1&lt;/div&gt;
+&lt;div class="nav" onmouseover="changeNav();"&gt;Div 2&lt;/div&gt;</code></pre>
+        <pre><code>function changeNav() {
+  var idk = document.....????
+}</code></pre>
+        <pre><code>&lt;div class="nav"&gt;Div 1&lt;/div&gt;
+&lt;div class="nav"&gt;Div 2&lt;/div&gt;</code></pre>
+        <pre><code>//put code where it belongs
+var navs = document.getElementsByClassName('nav');
+for(var i=0; i&lt;navs.length;i++) {
+  navs[i].addEventListener('mouseover', function() {
+    alert(this.innerText);
+  })
+}</code></pre>
+      <aside class="notes">anon function. this still kinda sucks but we'll get there. move script tag to top of file???</aside>
+      </section>
+      <section>
+        <h2>DOM Exercise</h2>
+        <ul>
+          <li>Creat a link on a page. When clicked, prompt for a person's name, favorite color, and favorite number.</li>
+          <li>Dynamically create a paragraph element displaying their name</li>
+          <li>If their favorite number is odd, color their name text their favorite color. If it's even, color the paragraph background their favorite color.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>jQuery</h2>
+        <ul>
+          <li class="fragment">Library providing functions that simplify working with the DOM and AJAX.</li>
+          <li class="fragment">"Write less, do more"</li>
+          <li class="fragment">The most popular JavaScript library (20 million sites)</li>
+          <li class="fragment">Probably the closest we ever got to full cross-browser standardization.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Including jQuery</h2>
+        <p>You can download jQuery locally and include it, which is recommended for real projects. For this, you can get a link to a CDN-hosted jQuery and use that. Go to https://code.jquery.com</p>
+        <pre><code>&lt;script src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"&gt;&lt;/script&gt;
+// don't forget to include jQuery ABOVE any other
+// code that needs it!</code></pre>
+      <aside class="notes">downloading protects you from changes/outages</aside>
+      </section>
+      <section>
+        <h2>Easier DOM Manipulation</h2>
+        <pre><code>&lt;div id="somediv"&gt;&lt;/div&gt;
+&lt;div class="nav"&gt;&lt;/div&gt;</code></pre>
+        <pre class="fragment"><code>let oldAndBusted = document.getElementById("somediv");
+let newHotness = $('#somediv'); // # = id
+let navDivs = $('.nav'); // . = class</code></pre>
+        <pre class="fragment"><code>var div = $('#somediv');
+let innerHTML = div.html();
+div.html('&lt;p&gt;HTML YAY&lt;/p&gt;');
+// var p = document.createElement('p');
+// document.body.appendChild(p);
+$('body').append('&lt;p&gt;');</code></pre>
+        <pre class="fragment"><code>div.css('width'); //read
+div.css('width', '200px'); //write
+div.attr('id'); //read
+// how to write id?</code></pre>
+      </section>
+      <section>
+        <h2>Document Ready</h2>
+        <p>So far, we've just been relying on our simple DOM to be loaded fast enough, but more complicated pages take time to render. We need a way to ensure the page has finished loading before we try to do something, like, attach event listeners.</p>
+        <pre><code>$(document).ready(function() {
+  //put any page init code here
+  // like event handlers
+});
+
+$(function() {
+  //shorthand version, same thing
+})</code></pre>
+      </section>
+      <section>
+        <h2>Events in jQuery</h2>
+        <pre><code>&lt;a href="#" id="link" class="clickable"&gt;Click Me&lt;/a&gt;
+&lt;a href="#" id="link2" class="clickable"&gt;Click Me 2&lt;/a&gt;</code></pre>
+        <pre class="fragment"><code>$(function() {
+  $('#link').on('click', function() {
+    // $(this) = jQuery element that triggered event
+    alert($(this).text());
+  })
+});</code></pre>
+      <pre class="fragment"><code>$('.clickable').on('click', function() {
+  alert($(this).text()); //no more loop
+});</code></pre>
+      <pre class="fragment"><code>$('#link').click(function(){});
+//not great for dynamic pages</code></pre>
+      </section>
+      <section>
+        <h2>Forms</h2>
+        <p>HTML forms allow us to capture structured data</p>
+        <pre class="fragment"><code>&lt;form id="about"&gt;
+  &lt;input type="text" id="name" placeholder="Enter Your Name"/&gt;
+  &lt;label&gt;Favorite Dinosaur&lt;/label&gt;
+  &lt;select id="dinosaur"&gt;
+    &lt;option value="velociraptor"&gt;Velociraptor&lt;/option&gt;
+    &lt;option value="somewronganswer"&gt;Some Wrong Answer&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;input type="text" id="dinoName"/&gt;
+  &lt;input type="submit" value="Go!"/&gt;
+&lt;/form&gt;</code></pre>
+      <pre class="fragment"><code>$(function(){
+  $('#about').submit(function(event)
+    var name = $('#name').val(); //get value from form
+    var dino = $('#dinosaur').val();
+    $('#dinoName').val(name = " the " + dino); // set val
+    return false; // prevent form from trying to "submit"
+  });
+})</code></pre>
+      </section>
+      <section>
+        <h2>DOM Lab</h2>
+        <p>We're going to create a library inventory system!</p>
+        <ul>
+          <li>Create a form to add books to our library. It should have fields for book title and author at minumum.</li>
+          <li>On submit, add to the "library" - append to a list of books and titles on the page.</li>
+          <li>BONUS: Add a "Check Out" button or link to each book that, when clicked, removes the book from the library.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Errors &amp; Debugging</h2>
+        <ul>
+          <li class="fragment">Setting breakpoints</li>
+          <li class="fragment"><code>debugger</code> statement</li>
+          <li class="fragment">Watching variables</li>
+          <li class="fragment">Logging (<code>console.log()</code>)</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Throwing and Catching Exceptions</h2>
+        <pre class="fragment"><code>try {
+  //something that might explode
+  throw new Error('welp');
+}
+catch(e) {
+  //handle the error
+}
+finally {
+  //optionally clean up
+}</code></pre>
+<aside class="notes">try/finally for transactions, or opening a file resource and making sure it's closed, etc;
+      </section>
+      <section>
+        <h2>Linting</h2>
+        <ul>
+        <li>Linting is the practice of evaluating code for syntax, usage, and even style. There are linters for almost every language.</li>
+        <li>You can use http://jshint.com/ online, or use a linter within your editor.</li>
+        <li>Linting is great for preventing the most common bugs in interpreted languages - syntax issues</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Debugging Lab</h2>
+        <p>We're going to put everything you've learned so far today to work in this debugging lab. Run the example code, find the errors, and make the program work. You'll need to pay attention to syntax, logic, scope, and everything else we've looked at today to solve it. Good luck!</p>
+      </section>
+    </div>
+  </div>
+
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+
+  <script>
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+      history: true,
+      center: false,
+
+      // More info https://github.com/hakimel/reveal.js#dependencies
+      dependencies: [{
+          src: 'plugin/markdown/marked.js'
+        },
+        {
+          src: 'plugin/markdown/markdown.js'
+        },
+        {
+          src: 'plugin/notes/notes.js',
+          async: true
+        },
+        {
+          src: 'plugin/highlight/highlight.js',
+          async: true,
+          callback: function() {
+            hljs.initHighlightingOnLoad();
+          }
+        }
+      ]
+    });
+  </script>
+</body>
+</html>
