@@ -28,9 +28,228 @@
       <!--    intro-->
       <section class="center">
         <h2>Introduction to JavaScript</h2>
-        <h4>Day 1: JavaScript Fundamentals</h4>
+        <h4>Day 2: JavaScript Data, AJAX, and APIS</h4>
       </section>
+      <section>
+        <h2>Questions from Yesterday?</h2>
+      </section>
+      <section>
+        <h2>Day One Quiz</h2>
+        <ul>
+          <li class="fragment">What data type would you use to hold a list of items in order?</li>
+          <li class="fragment">What is the literal constructor for an object?</li>
+          <li class="fragment">Which loop always executes at least once?</li>
+          <li class="fragment">Which loop would you use to act on every member of a collection?</li>
+          <li class="fragment">What library provides common, cross-browser functions for manipulating the DOM?</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Quiz, Continued</h2>
+        <ul>
+          <li class="fragment">When using jQuery selectors, how do you specify that you are looking for an id? A css class?</li>
+          <li class="fragment">How would you turn a comma-separated string into an array?</li>
+          <li class="fragment">What function do you use to wait for the DOM to fully load before executing?</li>
+          <li class="fragment">What is type coercion?</li>
+          <li class="fragment">Why use triple-equals?</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Today's Agenda</h2>
+        <ul>
+          <li class="fragment">Learn about callback functions and asynchronous JavaScript</li>
+          <li class="fragment">Learn what APIs are and how to use them with JavaScript</li>
+          <li class="fragment">Learn what AJAX is and how to use it to interact with APIs</li>
+          <li class="fragment">Learn different methods for authenticating to an API with JavaScript</li>
+        </ul>
+      </section>
+      <section>
+        <h2>New Tools</h2>
+        <ul>
+          <li>Postman</li>
+          <li>JSONView (Chrome/Firefox Extension)</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Functions Review</h2>
+        <ul>
+          <li class="fragment">Functions are objects.</li>
+          <li class="fragment">Functions are data.</li>
+          <li class="fragment">Functions are portable.</li>
+        </ul>
+          <pre class="fragment"><code>let func = function(x) {
+  console.log(x);
+}
+func("hi");</code></pre>
+      </section>
+      <section>
+        <h2>Functions as Arguments</h2>
+        <pre class="fragment"><code>let add = function(x,y) {
+  return x+y;
+}
+let subtract = function(x,y) {
+  return x-y;
+}
+let doMath = function(x,y,op) {
+  return op(x,y);
+}
+doMath(3,2,add);
+doMath(3,2,subtract);</code></pre>
+      </section>
+      <section>
+        <h2>Callback Functions</h2>
+        <p>Callback Functions are used to provide a way for an active function to pass its results to another function, often after a long-running or asynchronous operation.</p>
+        <pre class="fragment"><code>let finished = function(data) {
+    console.log(data);
+}
+let startOperation = function(done) {
+    for(var i=0;i&lt;100000;i++) {
+        //dosomething
+    }
+    done(i);
+}
+startOperation(finished);</code></pre>
+      </section>
+      <section>
+        <h4>You've Seen Callback Functions Before</h4>
+        <pre class="fragment"><code>$('#elem').on('click', function() {
+  //this anonymous function is a callback
+})
+$(document).ready(function() {
+  //as is this
+})
+</code></pre>
+      <pre class="fragment"><code>function clickHandler() {
+  //do the event handling here
+}
+$('#elem').on('click', clickHandler);</code></pre>
+      </section>
+      <section>
+        <h2>Asynchronous Operations</h2>
+        <p>Asynchronous code allows you to "kick off" an operation and then let the program continue without waiting for that operation to complete. Some uses for asynchronous code:</p>
+        <ul>
+          <li class="fragment">Long-running operations like reading or generating big data sets.</li>
+          <li class="fragment">Operations that cross system boundaries or require external resources.</li>
+          <li class="fragment">Operations that don't need to complete before the user moves on to other tasks.</li>
+        </ul>
+      </section>
+      <section>
+        <h4>setTimeout()</h4>
+        <p>The setTimeout() function sets a timer that executes the specified callback function after the timer expires.</p>
+        <pre class="fragment"><code>var timeoutID;
+function slowAlert() {
+  alert('That was really slow!');
+}
 
+function clearAlert() {
+  //cancels the timer
+  window.clearTimeout(timeoutID);
+}
+
+// hold a reference to the timer if we need to cancel
+timeoutID = window.setTimeout(slowAlert, 2000);
+// with anon func instead of callback
+window.setTimeout(function() {
+    alert('That was really slow!');
+}, 2000);
+</code></pre>
+      <aside class="notes">more readable with callbacks</aside>
+      </section>
+      <section>
+        <h4>setInterval()</h4>
+        <p>The setInterval() function repeatedly calls a function with a fixed time delay between each call.</p>
+        <pre class="fragment"><code>&lt;div id='box'&gt;Hello&lt;/div&gt;
+
+var intervalId;
+function changeColor() {
+  intervalId = setInterval(flashText, 1000);
+}
+
+function flashText() {
+  var box = document.getElementById('box');
+  //ternary operator
+  box.style.color = box.style.color == 'red' ? 'blue' : 'red';
+}
+
+function stopTextColor() {
+  clearInterval(intervalId);
+}</code></pre>
+      </section>
+      <section>
+        <h2>Async Lab</h2>
+        <p>Let's make a whammy game!</p>
+        <ul>
+          <li>Make an HTML page with a Start and Stop button. Create an array of prize amounts and "whammies" (e.g. [100, 200, 300, 400, 500, "Whammy!"])</li>
+          <li>When the player clicks Start, kick off a function to randomly generate a number that's a valid index in your array. Live-update the page with the current prize amount.</li>
+          <li>When the player clicks Stop, cancel the game timer and show them what they've won! Or lost!</li>
+          <li>Keep a running total of the score that gets wiped out if you land on Whammy.</li>
+        </ul>
+        <aside class="notes">The faster it goes, the harder it is!</aside>
+      </section>
+      <section>
+        <h2>Intro to APIs</h2>
+        <p>An application programming interface (API) is a façade providing simplified access to more complex code. We've already seen a bunch of APIs in action.</p>
+        <ul>
+          <li class="fragment">The `console` object is an API wrapping complicated browser functions.</li>
+          <li class="fragment">The DOM libraries in JavaScript and jQuery.</li>
+          <li class="fragment">Technically, any set of functions you make that abstract logic from the caller constitutes an API.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>HTTP Verbs</h2>
+      </section>
+      <section>
+        <h2>REST</h2>
+      </section>
+      <section>
+        <h2>JSON</h2>
+        read/write/parse
+      </section>
+      <section>
+        <h2>Online Play API</h2>
+      </section>
+      <section>
+        <h2>JavaScript AJAX</h2>
+        <h4>GETs</h4>
+      </section>
+      <section>
+        <h2>JavaScript AJAX</h2>
+        <h4>POSTs</h4>
+      </section>
+      <section>
+        <h2>AJAX Exercise</h2>
+      </section>
+      <section>
+        <h2>jQuery AJAX</h2>
+      </section>
+      <section>
+        <h2>jQuery AJAX Exercise</h2>
+      </section>
+      <section>
+        <h2>Common APIs</h2>
+      </section>
+      <section>
+        <h2>Reading API Docs</h2>
+      </section>
+      <section>
+        <h2>Exploring APIs with Postman</h2>
+      </section>
+      <section>
+        <h2>API Exercise - Reading Data</h2>
+        no auth
+      </section>
+      <section>
+        <h2>Authorization/Authentication</h2>
+        methods
+      </section>
+      <section>
+        <h2>Auth with Postman</h2>
+      </section>
+      <section>
+        <h2>AJAX Auth</h2>
+      </section>
+      <section>
+        <h2>AJAX Lab</h2>
+      </section>
     </div>
   </div>
 

@@ -65,10 +65,11 @@
       </section>
       <section>
         <h2>JavaScript Resources</h2>
-        <ul>TODO: url for resource page
+        <ul>
           <li class="fragment">Mozilla Developer Network (MDN)</li>
           <li class="fragment">StackOverflow</li>
           <li class="fragment">JavaScript Weekly</li>
+          <li class="fragment">https://scottcreynolds.github.io/javascript-class/</li>
         </ul>
       </section>
       <section>
@@ -77,7 +78,7 @@
           <li class="fragment">1995 - Brendan Eich at Netscape creates JavaScript in 10 days</li>
           <li class="fragment">1996 - Microsoft implements JScript for IE 3, kicking off our long national nightmare</li>
           <li class="fragment">1997 - DHTML in IE4 and Netscape Navigator 4</li>
-          <li class="fragment">2005 - AJAX brings "Web 2.0" to reality. JavaScript goes from "toy" to real deal.</li>
+          <li class="fragment">2005 - AJAX brings peak "Web 2.0". JavaScript goes from "toy" to real deal.</li>
           <li class="fragment">2006 - John Resig releases jQuery, we finally get productive with JavaScript</li>
           <li class="fragment">2009 - Ryan Dahl creates Node.js, server-side js goes mainstream</li>
         </ul>
@@ -146,15 +147,12 @@
         <pre><code>console.log("hello");</code></pre>
         <p>Multi-line statements (<em>blocks</em>) are bound by braces</p>
         <pre><code>if(true) {
-console.log("true!");
+  console.log("true!");
 }</code></pre><hr>
         <pre><code>//this is a comment</code></pre>
-        <pre>
-          <code>
-/* this is a
-   multi-line
-   comment */
-          </code>
+        <pre><code>/* this is a
+ multi-line
+ comment */</code>
         </pre>
       </section>
       <section>
@@ -985,7 +983,8 @@ bookworm.printBooks();
 &lt;/head&gt;
 &lt;body&gt;
   &lt;div id="uniqueId"&gt;I'm the Inner Text of Div uniqueid&lt;/div&gt;
-  &lt;div class="someStyle"&gt;This is all Inner HTML of Body&lt;/div&gt;
+  &lt;div class="someStyle"&gt;This is all Inner HTML of Body
+    &lt;a href="#"&gt;Link That Goes Nowhere!&lt;/a&gt;&lt;/div&gt;
   &lt;!-- "class" and "id" are ATTRIBUTES of their elements --&gt;
   &lt;!-- when possible load scripts at end of body
   so they don't block page rendering --&gt;
