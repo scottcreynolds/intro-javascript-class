@@ -1,11 +1,10 @@
 $(function() {
-  debugger;
-  var x = 0;
-  console.log('hi');
-  $('.clickable').on('click', function() {
-    alert($(this).text()); //no more loop
-  });
-  $('#link').on('click', function() {
-    alert($(this).text());
-  });
+ $('.user').on('click', function() {
+    var id = $(this).data("user");
+    console.log($(this).dataset)
+    console.log(id)
+    $.get('https://github/repos/' + user, function(data) {
+      //do something
+    })
+  })
 });

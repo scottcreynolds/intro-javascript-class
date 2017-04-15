@@ -28,17 +28,137 @@
       <!--    intro-->
       <section class="center">
         <h2>Introduction to JavaScript</h2>
-        <h4>Day 1: JavaScript Fundamentals</h4>
+        <h4>Advanced JavaScript</h4>
       </section>
-      <!--                more advanced stuff-->
+<!-- PROMISES/ARROWS/FETCH -->
+      <section>
+        <h2>Promises, Promises</h2>
+        <p><small>A Promise object represents a value that may not be available yet, but will be resolved at some point in the future. Essentially, the promise is an object that represents the result of an operation, whenever it occurs. This allows us to write more flexible asynchronous code than simply passing callback functions to asynchronous functions.</small></p>
+        <ul>
+          <li class="fragment">Eliminate "callback hell" and write clean code.</li>
+          <li class="fragment">Decouple from event-driven structures.</li>
+          <li class="fragment">Chain <em>thenable</em> statements for readable structure.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Promise Example</h2>
+        <pre class="fragment"><code>order('Shack Burger')
+  .then(function(order) { //order = returned val from order
+    finishedOrder = order.prepare()
+    return finishedOrder //pass this down the chain
+  })
+  .then(function(food) { //food = returned val from last then
+    serve(food)
+  })
+  .catch(function(err) {
+    console.log("oops")
+  }) //where have we seen this pattern?</code></pre>
+      <pre class="fragment"><code>$.get(uri)
+  .done(function(data) {
+    console.log("success!");
+  })
+  .fail(function(err) {
+    console.log('oops!');
+  })</code></pre>
+      </section>
+      <section>
+        <h2>Arrow Functions</h2>
+        <p><small>Arrow functions are an ES6 feature that provides a new syntax and some new behavior to JavaScript functions.</small></p>
+        <pre class="fragment"><code>var arrowFunction = () => {
+  console.log('I was called!')
+}
+
+var regularFunction = function() {
+  console.log('I was called, too!')
+}
+
+arrowFunction() // 'I was called!'
+regularFunction() // 'I was called, too!'</code></pre>
+      </section>
+      <section>
+        <h2>Arrow Functions</h2>
+        <h4>Arguments</h4>
+        <pre class="fragment"><code>var arrowFunction = (arg1, arg2) => {
+  console.log(arg1, arg2)
+}
+
+arrowFunction('Hey,', 'you!') // 'Hey, you!'
+
+//if only one arg, you can leave off the parens
+var singleArgFunction = arg1 => {
+  console.log(arg1)
+}
+
+singleArgFunction("hi!")</code></pre>
+      </section>
+      <section>
+        <h2>Arrow Functions</h2>
+        <h4>Implicit Return</h4>
+        <pre class="fragment"><code>function square(x) {
+  return x*x;
+}
+
+var arrowSquare = n => n*n
+//only with no body block
+
+square(4) // 16
+arrowSquare(4) // 16</code></pre>
+      </section>
+      <section>
+        <h2>Arrow Functions</h2>
+        <pre class="fragment"><code>order('Shack Burger')
+  .then(function(order) { //order = returned val from order
+    finishedOrder = order.prepare()
+    return finishedOrder //pass this down the chain
+  })
+  .then(function(food) { //food = returned val from last then
+    serve(food)
+  })
+  .catch(function(err) {
+    console.log("oops")
+  })</code></pre>
+  <pre class="fragment"><code>order('Shack Burger')
+  .then(order => order.prepare()) //implicit return
+  .then(food => serve(food))
+  .catch(err => { console.log("oops") })</code></pre>
+      </section>
+      <section>
+        <h2>Putting it Together</h2>
+        <pre class="fragment"><code>fetch('https://api.github.com/repos/jquery/jquery/commits')
+  .then(resp => resp.json())
+  .then(json => console.log(json));</code></pre>
+      </section>
+      <section>
+        <h2>Fetch API</h2>
+        <code>fetch('https://api.github.com/repos/jquery/jquery/commits')
+  .then(resp => resp.json())
+  .then(json => console.log(json));</code></pre>
+        <small><ul>
+          <li class="fragment">Built from the ground up to handle modern web needs, like JSON and streaming.</li>
+          <li class="fragment"><code>fetch()</code>is a global function. No making XHR objects.</li>
+          <li class="fragment">Promise-based.</li>
+          <li class="fragment">Body <em>mixin</em> provides parsing.</li>
+          <li class="fragment">Not supported in IE OF COURSE BECAUSE WHY HAVE NICE THINGS</li>
+        </ul></small>
+      </section>
+      <section>
+        <h2>Authenticated Fetch</h2>
+        <pre class="fragment"><code>const token = 'YOUR_TOKEN_HERE'
+fetch('https://api.github.com/user/repos', {
+  headers: {
+    Authorization: `token ${token}`
+  }
+}).then(res => res.json()).then(json => console.log(json));</code></pre>
+      </section>
+<!-- END PROMISES/ARROWS/FETCH -->
+      <section>
+        <h2>Handlebars</h2>
+      </section>
       <section>
         <h2>Closures</h2>
       </section>
       <section>
         <h2>Map/Reduce</h2>
-      </section>
-      <section>
-        <h1>Arrow Functions</h1>implicit return
       </section>
       <section>
         <h1>Prototypal JavaScript</h1>

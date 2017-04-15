@@ -497,6 +497,17 @@ switch(mood) {
  }</code></pre>
       </section>
       <section>
+        <h2>Making Decisions</h2>
+        <h4>Ternary Operator</h4>
+        <p>Sometimes it's nice to condense things to one line:</p>
+        <pre class="fragment"><code>var x = 0;
+// condition ? valueForTrue : valueForFalse;
+x > 0 ? "More!" : "Not More!"; //what output?
+
+//always err on the side of readability
+(typeOf(x) === Number &amp;&amp; x > 0) ? document.getElementById(x) : document.getElementsByClassName(x)[0];</code></pre>
+      </section>
+      <section>
         <h2>Arrays</h2>
         <ul>
           <li class="fragment">Data structure that represents a list.</li>
@@ -1198,7 +1209,7 @@ $(function() {
           <li class="fragment">Setting breakpoints</li>
           <li class="fragment"><code>debugger</code> statement</li>
           <li class="fragment">Watching variables</li>
-          <li class="fragment">Logging (<code>console.log()</code>)</li>
+          <li class="fragment">Logging (<code>console.log(); console.warn(); console.error();</code>)</li>
         </ul>
       </section>
       <section>

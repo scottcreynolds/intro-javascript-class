@@ -166,7 +166,7 @@ function changeColor() {
 
 function flashText() {
   var box = document.getElementById('box');
-  //ternary operator
+  //what operator?
   box.style.color = box.style.color == 'red' ? 'blue' : 'red';
 }
 
@@ -176,79 +176,416 @@ function stopTextColor() {
       </section>
       <section>
         <h2>Async Lab</h2>
-        <p>Let's make a whammy game!</p>
+        <small><p>Let's make a whammy game!</p>
         <ul>
           <li>Make an HTML page with a Start and Stop button. Create an array of prize amounts and "whammies" (e.g. [100, 200, 300, 400, 500, "Whammy!"])</li>
           <li>When the player clicks Start, kick off a function to randomly generate a number that's a valid index in your array. Live-update the page with the current prize amount.</li>
           <li>When the player clicks Stop, cancel the game timer and show them what they've won! Or lost!</li>
           <li>Keep a running total of the score that gets wiped out if you land on Whammy.</li>
-        </ul>
+        </ul></small>
         <aside class="notes">The faster it goes, the harder it is!</aside>
       </section>
       <section>
         <h2>Intro to APIs</h2>
         <p>An application programming interface (API) is a façade providing simplified access to more complex code. We've already seen a bunch of APIs in action.</p>
         <ul>
-          <li class="fragment">The `console` object is an API wrapping complicated browser functions.</li>
+          <li class="fragment">The <code>console</code> object is an API wrapping complicated browser functions.</li>
           <li class="fragment">The DOM libraries in JavaScript and jQuery.</li>
           <li class="fragment">Technically, any set of functions you make that abstract logic from the caller constitutes an API.</li>
         </ul>
       </section>
       <section>
+        <h2>Why Build APIs?</h2>
+        <ul>
+          <li class="fragment">Separate Concerns for architecture and scale reasons (front-end/back-end, system boundaries, etc).</li>
+          <li class="fragment">Reuse across clients (iOS, Android, Web -> same back end)</li>
+          <li class="fragment">Abstract complex logic/data, and control access.</li>
+        </ul>
+        <aside class="notes">SoC - Twitter scale.</aside>
+      </section>
+      <section>
+        <h2>Web APIs</h2>
+        <p>Many web appliations provide APIs to subsets of their data and functionality, allowing developers the freedom to create new applications by combining available data. For some, it's their whole business model.</p>
+        <ul>
+          <li class="fragment">Social APIs: Twitter, Facebook, Foursquare, Meetup, YouTube, Spotify.</li>
+          <li class="fragment">Utility APIs: Github, Google Maps, Twilio, Stripe, Mailchimp, Slack, Spark, Outlook.</li>
+          <li class="fragment">Authentication APIs: Google, Facebook, Twitter, Amazon, Tumblr, a forever amount more.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Some Interesting APIs</h2>
+        <ul>
+          <li class="fragment">Twinword Sentiment Analysis: <br/> <small>https://www.twinword.com/api/sentiment-analysis.php</small></li>
+          <li class="fragment">Star Wars API: <br/><small>http://swapi.co/api/</small></li>
+          <li class="fragment">Meme API: <br/><small>http://apimeme.com/meme?meme=Chemistry+Cat&amp;top=Eat+bananas+for+potassium%3F&amp;bottom=K</small></li>
+        </ul>
+      </section>
+      <section>
         <h2>HTTP Verbs</h2>
+        <ul>
+          <li class="fragment">GET - retrieve resource data</li>
+          <li class="fragment">POST - create new resource</li>
+          <li class="fragment">PUT - Update/Replace resource</li>
+          <li class="fragment">PATCH - Update/Modify resource</li>
+          <li class="fragment">DELETE - Delete resource</li>
+          <li class="fragment">GET/POST are what you will deal with most often when consuming APIs</li>
+        </ul>
       </section>
       <section>
         <h2>REST</h2>
-      </section>
-      <section>
-        <h2>JSON</h2>
-        read/write/parse
-      </section>
-      <section>
-        <h2>Online Play API</h2>
-      </section>
-      <section>
-        <h2>JavaScript AJAX</h2>
-        <h4>GETs</h4>
-      </section>
-      <section>
-        <h2>JavaScript AJAX</h2>
-        <h4>POSTs</h4>
-      </section>
-      <section>
-        <h2>AJAX Exercise</h2>
-      </section>
-      <section>
-        <h2>jQuery AJAX</h2>
-      </section>
-      <section>
-        <h2>jQuery AJAX Exercise</h2>
-      </section>
-      <section>
-        <h2>Common APIs</h2>
+        <ul>
+          <li class="fragment">Representational State Transfer</li>
+          <li class="fragment"><small>Using a predictable resource-focused URI to communicate with the server.</small></li>
+          <small><li class="fragment"><code>https://api.site.com/resource/action/filter</code></li></small>
+          <li class="fragment">Resource: noun that represents a system object (e.g. user)</li>
+          <li class="fragment">Action: what to do to the resource (retrieve/create/update)</li>
+          <li class="fragment">Filter: any sort of query/filter on the data (e.g. id)</li>
+          <li class="fragment">Most API endpoints are a combination of a VERB + URI. GET /users = retrieve all users. POST /users = create new user (why /users?)</li>
+        </ul>
+        <aside class="notes">/users is the resource
+        look at the routes for swapi again, then look at params for memegen</aside>
       </section>
       <section>
         <h2>Reading API Docs</h2>
+        <ul>
+          <li class="fragment">https://developer.github.com/v3/</li>
+          <li class="fragment">https://developer.spotify.com/web-api/</li>
+          <li class="fragment">https://developer.foursquare.com/docs/</li>
+        </ul>
+      </section>
+      <section>
+        <h2>JSON</h2>
+        <ul>
+          <li class="fragment">JavaScript Object Notation</li>
+          <li class="fragment"><small>Say it like it's a human name not a robot name (Jason, not Jay-Son)</small></li>
+          <li class="fragment">Plain Ol' Javascript Objects, mostly. Data only, no behavior.</li>
+          <li class="fragment">Uses JavaScript syntax, but is not necessarily "JavaScript". It's a <em>serialized</em> string.</li>
+          <li class="fragment">Modern format for API data/communication. Has <em>largely</em> replaced XML as the standard.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>JSON Structure</h2>
+        <pre><code>{
+  "star": "Sun",
+  "planets": [
+    {
+      "name": "Mercury",
+      "position": 1,
+      "age": 4503000000
+    },
+    {
+      "name": "Earth",
+      "position": 3,
+      "age": 4543000000,
+      "satellites": [
+        {
+          "name": "Moon"
+        }
+      ]
+    }
+  ]
+}</code></pre>
+      </section>
+      <section>
+        <h2>Reading JSON</h2>
+        <pre><small><code>//from string
+var planet = '{"name":"Jupiter","rings":true,"moons":["Europa","Ganymede","Io","Callisto"]}';
+planet.name; // nope
+var j = JSON.parse(planet);
+j.name; // "Jupiter"
+j.moons;</code></small></pre>
+      <pre><small><code>var nested = '{"name": "Tom", "kids":[{"name": "Sally"},{"name": "Tina"}]'
+var tom = JSON.parse(nested);
+tom.kids[0].name;
+tom["kids"][0]["name"];
+tom.kids.length; </code></small></pre>
+      </section>
+      <section>
+        <h2>Writing JSON</h2>
+        <pre><code>var obj = {name: "Jupiter", moons: ["Europa", "Io"]};
+var json = JSON.stringify(obj);
+console.log(json);
+console.log(obj);
+
+obj.sayMoons = function() {
+  for(let i=0;i&lt;this.moons.length;i++) {
+    console.log(this.moons[i]);
+  }
+}
+obj.sayMoons();
+json = JSON.stringify(obj);
+console.log(json); //no methods</code></pre>
+      </section>
+      <section>
+        <h2>Parsing XML</h2>
+        <p><small>You may find yourself needing to interact with XML from time to time. It's less fun than JSON, but XML has a DOM just like an HTML web page (in fact, HTML is a specialized XML).</small></p>
+        <pre class="fragment"><code>var text = "<bookstore><book>" +
+"<title>Everyday Italian</title>" +
+"<author>Giada De Laurentiis</author>" +
+"<year>2005</year>" +
+"</book></bookstore>";
+
+var parser = new DOMParser();
+var xmlDoc = parser.parseFromString(text,"text/xml");
+console.log(xmlDoc.getElementsByTagName('title')[0].innerHTML)</code></pre>
+      </section>
+      <section>
+        <h2>JSON Parsing Lab</h2>
+        <p>Use the Star Wars API (http://swapi.co/api/) to practice parsing JSON. We will build on these functions in a future exercise! Each function should take a string argument for the JSON input.</p>
+        <small><ul>
+          <li>Create a function to parse the JSON from the Films endpoint (http://swapi.co/api/films/) for a single film and log the values for the title, opening crawl, characters, and planets to the console.</li>
+          <li>Create a function to parse the JSON from the People endpoint for a specific character and output the name to the console.</li>
+          <li>Create a function to parse the JSON from the Planets endpoint for a given planet, outputting the name and terrain.</li>
+        </ul></small>
+      </section>
+      <section>
+        <h2>AJAX</h2>
+        <ul>
+          <li class="fragment">Asynchronous JavaScript and XML.</li>
+          <li class="fragment"><small>But not really XML that much anymore.</small></li>
+          <li class="fragment">Communicate to server/API without blocking the client.</li>
+          <li class="fragment">Allows interactivity and client updates without full refreshes/stopping user action.</li>
+          <li class="fragment">Consider a fully synchronous Twitter. Nightmare!!</li>
+        </ul>
+      </section>
+      <section>
+        <h2>XMLHttpRequest (XHR)</h2>
+        <ul>
+          <li class="fragment">Basic (and oldest, hence "XML") JS client/server API.</li>
+          <li class="fragment">Event-based Architecture.</li>
+          <li class="fragment">Built around a request/response object model.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Getting Data with XHR</h2>
+        <p><small>Let's use XHR to explore the Github API. https://developer.github.com/v3/repos/#list-user-repositories</small></p>
+        <pre class="fragment"><code>//type in network tab
+const req = new HMLHttpRequest() // get new XHR request object
+req.open("GET", 'https://api.github.com/users/octocat/repos') // "open" (but don't activate) request
+req.send() // actually send request to server</code></pre>
+      <aside class="notes">explore network tab, explore gh api a little</aside>
+      </section>
+      <section>
+      xhr -> jquery -> promises -> fetch
+      github api exercises each time, modularity of function
+        <h4>Handling XHR Responses</h4>
+        <pre class="fragment"><code>function showRepositories(event, data) {
+  //"this" = XMLHttpRequest object that fired the event
+  console.log(this);
+  //console.log(this.responseText)
+}
+
+function getRepositories() {
+  const req = new XMLHttpRequest()
+  req.addEventListener("load", showRepositories); //what is showRepositories?
+  req.open("GET", 'https://api.github.com/users/octocat/repos')
+  req.send()
+}</code></pre>
+      <pre class="fragment"><code>function showRepositories(event, data) {
+  console.log(JSON.parse(this.responseText));
+}
+</code></pre>
+      </section>
+      <section>
+        <h2>XHR Exercise</h2>
+        <p>Using XHR to explore the Github API, write a set of functions that:</p>
+        <ol>
+          <li>Lists all public repositories</li>
+          <li>Lists the first five commits for each repository</li>
+        </ol>
+      </section>
+      <section>
+        <h2>XHR Limitations</h2>
+        <ul>
+          <li>Event model restrictive</li>
+          <li>Very low-level</li>
+          <li>Not natively JSON-aware</li>
+        </ul>
+      </section>
+      <section>
+        <h2>jQuery AJAX</h2>
+        <p>jQuery provides very easy ways to do AJAX with a common interface.</p>
+        <pre class="fragment"><code>var uri = 'https://api.github.com/users/octocat/repos'
+$.get(uri, function(data) {
+  //what kind of function are we in?
+  console.log(data);
+})
+//what if there's an error? or a lot of code?
+//what about Separation of Concerns/Single Responibility Principle?</code></pre>
+      </section>
+      <section>
+        <h2>jQuery AJAX Handlers</h2>
+        <pre class="fragment"><code>var uri = 'https://api.github.com/users/octocat/repos'
+$.get(uri)
+  .done(function(data) {
+    console.log(data);
+    console.log("success!");
+  })
+  .fail(function(err) {
+    console.log(err);
+    console.log('oops!');
+  })</code></pre>
+  <aside class="notes">explain method chaining</aside>
+      </section>
+      <section>
+        <h2>Even More jQuery AJAX</h2>
+        <p><small>jQuery.get() is a <em>wrapper</em> for jQuery.ajax(), simplifying the call. But if you need more control, you can call <code>$.ajax()</code> directly.</small></p>
+        <pre class="fragment"><code>$.ajax({
+  method: "POST",
+  url: "some.php",
+  dataType: "xml", // how the "data" param knows what it is
+  headers: {"Custom-Header": 'header-value'},
+  data: { name: "John", location: "Boston" }
+})
+  .done(function( msg ) {
+    alert( "Data Saved: " + msg );
+  });</code></pre>
+      </section>
+      <section>
+        <h2>jQuery AJAX Exercise</h2>
+        <p>Set up an HTML page that imports jQuery, then rewrite your Github API code to use jQuery instead of XHR.</p>
+        <ul>
+          <li>List all public repositories in an HTML list element on the page.</li>
+          <li>List the first five commits for each repository within a sub-list.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Data Attributes</h2>
+        <p><small>When building dynamic HTML elements, we sometimes need to store useful bits of data so that we can retrieve them with JavaScript. For instance, in our last exercise, we might want easy access to the user id of a repository owner that we can access without parsing the text of the element.</small></p>
+        <pre class="fragment"><code>//not super easy to access the data
+&lt;li&gt;User Name: octocat&lt;/li&gt;
+
+//not semantically accurate and fails if more than one
+//repo from octocat
+&lt;li id="octocat"&gt;User Name: octocat&lt;/li&gt;
+
+//here we go
+&lt;li data-user="octocat"&gt;User Name: octocat&lt;/li&gt;</code></pre>
+      </section>
+      <section>
+        <h2>Using Data Attributes</h2>
+        <pre class="fragment"><code>&lt;li class="user" data-user="octocat"&gt;User Name: octocat&lt;/li&gt;
+
+//what is this function?
+$(function() {
+  $('.user').on('click', function() {
+    var id = $(this).data("user");
+    $.get('https://github/repos/' + id, function(data) {
+      //do something
+    })
+  })
+})
+
+//plain javascript
+el = document.getElementsByClassName('user')[0]
+el.dataset.user</code></pre>
+      </section>
+      <section>
+        <h2>API Lab</h2>
+        <p>Go back to your Star Wars API functions from earlier and let's put this all together and upgrade it.</p>
+        <ul>
+          <li>Create an HTML page. Add a link to get the list of films. Replace your XHR with jQuery AJAX and display just the list of film titles as links.</li>
+          <li>When you click the link for a film, retrieve the film's planet and character data and display it on the page. Replace any previous XHR with jQuery.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Writing Data</h2>
+        <p>So far we've just been performing GETs to read data from an API, but we often need to write data as well. Usually, this is done with a POST.</p>
+        <pre class="fragment"><code>$.post( "test.php", { name: "John", time: "2pm" })
+  .done(function( data ) {
+    alert( "Data Loaded: " + data );
+  });
+  //easy enough but there's other concerns</code></pre>
+      </section>
+      <section>
+        <h3>Authorization/Authentication</h3>
+        <p>Most APIs will require some form of authentication to use write (and often, read) API endpoints. Common auth methods are:</p>
+        <ul>
+          <li class="fragment">HTTP Auth with Username/Password (less common, not great)</li>
+          <li class="fragment">User-based API access token (OAuth/other)</li>
+          <li class="fragment">Application-based API id/key pair</li>
+          <li class="fragment">Combination!</li>
+        </ul>
+        <aside class="notes">Need user access to perform actions for a user, app access to perform general actions based on an application. Some operations will require both.</aside>
+      </section>
+      <section>
+        <h4>Setting Up an API ID/Key Pair</h4>
+        <p><small>An API key/id pair is just a way to identify an app and is not tied to your user login.</small></p>
+        <ul>
+          <li>Go to https://foursquare.com/developers/apps (sign in or register).</li>
+          <li>Create new app. Use http://localhost for the APP URL.</li>
+          <li>Copy and save CLIENT_ID and CLIENT_SECRET somewhere so we can use it.</li>
+          <li>Make sure you know which is the ID and which is the secret!</li>
+        </ul>
+      </section>
+      <section>
+        <h4>Setting Up An OAuth Token</h4>
+        <p><small>An OAuth token is tied to your user and is essentially a login.</small></p>
+        <ul>
+          <li>Log in to (or sign up for) Github.</li>
+          <li>Go to https://github.com/settings/tokens and Generate New Token. Name it "Javascript Class" and check "repo" scope.</li>
+          <li>Copy and past the token somewhere, because you won't see it again (this is a common security practice).</li>
+        </ul>
+        <aside class="notes">you can gen another if you lose it</aside>
+      </section>
+      <section>
+        <h3>Authenticating to APIs</h3>
+        <p>Let's check out authentication with an API call using the Foursquare API. Go to https://developer.foursquare.com/docs/ and let's try the venues endpoint.</p>
+        <p class="fragment">Now let's try Github</p>
+        <aside class="notes">
+        <br>
+github takes in header which we can't even do in a URL bar. Better way to explore.</aside>
       </section>
       <section>
         <h2>Exploring APIs with Postman</h2>
+        <p>Postman is an app that makes interacting with APIs easy. https://www.getpostman.com/</p>
+        <aside class="notes">Regular browse with github -> auth browse with params -> auth browse with oauth -> post with github</aside>
       </section>
       <section>
-        <h2>API Exercise - Reading Data</h2>
-        no auth
+        <h2>AJAX With Auth</h2>
+        <h4>GET</h4>
+        <pre class="fragment"><code>let your_token = "YOUR TOKEN";
+$.ajax( {
+  url: 'https://api.github.com/user/repos',
+  headers: {
+    "authorization": `token ${your_token}`
+  }
+})
+.done(function(data) {
+  console.log(data);
+})</code></pre>
+      <aside class="notes">what's the `` construct?</aside>
       </section>
       <section>
-        <h2>Authorization/Authentication</h2>
-        methods
+        <h2>AJAX with Auth</h2>
+        <h4>POST</h4>
+        <pre class="fragment"><code>let your_token = "YOUR TOKEN";
+$.ajax( {
+  url: 'https://api.github.com/user/repos',
+  method: 'POST',
+  headers: {
+    "authorization": `token ${your_token}`
+  },
+  data: '{"name": "scr-gh-post-test"}'
+})
+.done(function(data) {
+  console.log(data);
+})</code></pre>
       </section>
       <section>
-        <h2>Auth with Postman</h2>
-      </section>
-      <section>
-        <h2>AJAX Auth</h2>
+        <h4>Easy Code Snippets with Postman</h4>
+        <p>You can use Postman to generate your API access code for you!</p>
+        <ul>
+          <li>Set up an API call like normal</li>
+          <li>Click "Code" and select language</li>
+        </ul>
       </section>
       <section>
         <h2>AJAX Lab</h2>
+        <ul>
+        <li>Pick an API that interests you. Explore it. Create an HTML page that utilizes its functions.</li>
+        <li>Bonus: Use data from two or more APIs to create a mashup!</li>
+        <small><p>Some APIs of interest: Twitter, Facebook, Foursquare, Darksky, IBM Watson, Github, Google, Meetup, Twilio, Spotify, News API, Battle.net, and a billion more.</p></small>
       </section>
     </div>
   </div>
