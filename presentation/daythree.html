@@ -35,27 +35,120 @@
       </section>
       <section>
         <h2>Day Two Quiz</h2>
+        <ul>
+          <li class="fragment">What is AJAX?</li>
+          <li class="fragment">What is JSON?</li>
+          <li class="fragment">What is the difference between JSON and a js Object?</li>
+          <li class="fragment">What native JavaScript object do we use to make AJAX requests?</li>
+          <li class="fragment">What routing pattern uses resource-based URIs for server operations?</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Quiz Cont'd</h2>
+        <ul>
+          <li class="fragment">What HTTP verb is used to read data from the server?</li>
+          <li class="fragment">What HTTP verb is used to write data to the server?</li>
+          <li class="fragment">What are the different ways to authenticate to an API?</li>
+          <li class="fragment">Which authentication method is most common for application-level operations?</li>
+          <li class="fragment">Which authentication method is most common for user-level operations?</li>
+        </ul>
       </section>
       <section>
         <h2>Today's Agenda</h2>
+        <ul>
+          <li class="fragment">Server-side JavaScript with Node</li>
+          <li class="fragment">Routing and Responding to HTTP requests</li>
+          <li class="fragment">Webhooks</li>
+          <li class="fragment">Spark API</li>
+          <li class="fragment">Spark Bots</li>
+        </ul>
       </section>
       <section>
         <h2>New Tools</h2>
+        <ul>
+          <li>ngrok</li>
+          <li>Node.js</li>
+          <li>NPM</li>
+        </ul>
       </section>
       <section>
         <h2>What is Node.js?</h2>
+        <p>Node is an "asynchronous event-driven JavaScript runtime".</p>
+        <small>
+        <ul>
+          <li class="fragment">Runtime - a place that executes code. Chrome Inspector, REPL.it, Node.js</li>
+          <li class="fragment">Event-driven - Implemented as an event loop, it just waits for instructions to execute. </li>
+          <li class="fragment">Asynchronous - Executes code essentially in <code>setTimeout()</code> and <code>setInterval()</code> calls, so it's "non-blocking".</li>
+          <li class="fragment">Built with HTTP in mind. Networking is a first-class citizen. Streaming and latency are core design concerns.</li>
+          <li class="fragment">Full ES6 compliance!</li>
+        </ul>
+        </small>
+        <aside class="notes">This is a simplification of course</aside>
       </section>
       <section>
         <h2>Node Ecosystem</h2>
+        <ul>
+          <li class="fragment">Node Core - The Runtime</li>
+          <li class="fragment">Modules/Packages - External Libraries</li>
+          <li class="fragment">NPM - Node Package Manager</li>
+          <li class="fragment">Task Runners (gulp/grunt) - deploy and utility</li>
+          <li class="fragment">Tests - Mocha/Karma</li>
+        </ul>
+        <aside class="notes">other package managers like yarn. ton of tools. can be daunting. sticking with basics.</aside>
       </section>
       <section>
-        <h2>NPM</h2>
+        <h2>Hello Node</h2>
+        <p>First thing's first. Let's launch Node in REPL mode and play with it. Drop into a terminal/console and type <code>node</code></p>
+        <pre class="fragment"><code>//do some js!
+let i = 0;
+i++;
+
+// what kind of function is this?
+let square = x => x*x
+
+square(5)
+
+.exit //leave the REPL</code></pre>
       </section>
       <section>
-        <h2>Getting Node Running</h2>
+        <h2>Running Scripts with Node</h2>
+        <pre class="fragment"><code>//my_script.js
+let hello = () => console.log('Hello World')
+
+hello()</code></pre>
+       <pre class="fragment"><code>//terminal
+node my_script.js</code></pre>
+      <p class="fragment">Just a script runner. Nothing scary.</p>
       </section>
       <section>
-        <h2>First Node Server</h2>
+        <h2>Node Debugger</h2>
+        <small>
+          <ul>
+            <li><code>node debug program.js</code></li>
+            <li><code>n</code> -> next instruction</li>
+            <li><code>repl</code> -> enter repl to check values/change values</li>
+            <li><code>s/o</code> -> step in/out</li>
+            <li><code>c</code> -> continue until breakpoint</li>
+            <li><code>sb(5)</code> -> set breakpoint at line 5</li>
+            <li>responds to <code>debugger</code> in source</li>
+            <li><code>help</code> -> you guessed it</li>
+          </ul>
+        </small>
+        <aside class="notes">node debug node_debug.js. show repl to change val of a. show restart. show rerunning the code.</aside>
+      </section>
+      <section>
+        <h2>Creating a Web Server</h2>
+        <p>Enough talk. Node is a server-side js runtime, so let's create a server.</p>
+        <pre class="fragment"><code>//server.js
+var http = require("http");
+
+http.createServer(function(request, response) {
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.write("Hello World");
+  response.end();
+}).listen(8888);</code></pre>
+<pre class="fragment"><code>node server.js</code></pre>
+      <aside class="notes">run the server, then walk through code line by line</aside>
       </section>
       <section>
         <h2>Routing</h2>
@@ -64,7 +157,26 @@
         <h2>RESTful Routes</h2>
       </section>
       <section>
+        <h2>NPM</h2>
+        <p>NPM - the Node Package Manager, is used to install and manage dependencies and libraries in your projects.</p>
+        <ul>
+          <li>npmjs.com - find packages</li>
+          <li>Create NPM-aware projects with <code>npm init</code></li>
+          <li>install packages with <code>npm install package</code></li>
+        </ul>
+        <aside class="notes">explore npmjs for a hot minute</aside>
+      </section>
+
+      <section>
         <h2>Express</h2>
+      </section>
+      <section>
+        <h2>Making An API</h2>
+      </section>
+      <section>
+        <h2>Webhooks</h2>
+        <p>Webhooks are endpoints that allow one system to notify another of something that happened. You can think of it like an "event api" or a "web callback".</p>
+        <p>Semantic differences aside, webhooks exist to receive notifications of events, e.g. a message was posted in a Spark channel.</p>
       </section>
     </div>
   </div>
