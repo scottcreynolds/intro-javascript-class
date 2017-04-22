@@ -148,13 +148,29 @@ http.createServer(function(request, response) {
   response.end();
 }).listen(8888);</code></pre>
 <pre class="fragment"><code>node server.js</code></pre>
-      <aside class="notes">run the server, then walk through code line by line</aside>
+      <aside class="notes">run the server, then walk through code line by line. console.log some output, examine the request object, esp request.headers and request.url</aside>
       </section>
       <section>
         <h2>Routing</h2>
+        <p>Routing in a web application is a system of mapping a request to a URL with an action that handles that request and provides a response.</p>
+        <p>A web application will have multiple endpoints, so we need a way to capture the requested endpoint and make a decision.</p>
+        <aside class="notes">routing_server.js look at url. how we make decisions? Extract a couple route handlers.</aside>
       </section>
       <section>
-        <h2>RESTful Routes</h2>
+        <h2>Node Server Lab</h2>
+        <p>Create a script that launches a server and responds to three different routes.</p>
+      </section>
+      <section>
+        <h4>API Considerations</h4>
+        <ul>
+          <li class="fragment">RESTful Routes and HTTP Verbs</li>
+          <li class="fragment">Resource Management (data, files, other APIs)</li>
+          <li class="fragment">Code Organization</li>
+          <li class="fragment">Productivity</li>
+          <li class="fragment">Performance</li>
+        </ul>
+        <small><p class="fragment">All of this is a lot when you're doing it by hand. Gotta be a better way!</p></small>
+        <aside class="notes">And a bot IS an API</aside>
       </section>
       <section>
         <h2>NPM</h2>
@@ -166,17 +182,78 @@ http.createServer(function(request, response) {
         </ul>
         <aside class="notes">explore npmjs for a hot minute</aside>
       </section>
-
       <section>
         <h2>Express</h2>
+        <p><small>Flexible, minimal Node.js web application framework</small></p>
+        <pre class="fragment"><code>npm init
+npm install express --save
+touch index.js</code></pre>
+        <pre class="fragment"><code>const express = require('express')
+const app = express()
+
+app.get('/', function(req, res) {
+  res.send('Hello Express!')
+})
+
+app.listen(8888, function() {
+  console.log("Hello, Seattle, I'm listening")
+})
+// console
+node index.js
+</code></pre>
+        <aside class="notes">--save auto adds to dependencies section so npm install works. show that it handles missing routes. add a route. talk about verbs.</aside>
       </section>
       <section>
         <h2>Making An API</h2>
+        <ul>
+          <li>Use Node and Express to create an API.</li>
+          <li>Create an HTML and jQuery page to consume the API.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Consuming APIs in Node</h2>
+        <ul>
+          <li>Not that different from what we've already done!</li>
+          <li>Be mindful of the Request/Response lifecycle.</li>
+        </ul>
       </section>
       <section>
         <h2>Webhooks</h2>
         <p>Webhooks are endpoints that allow one system to notify another of something that happened. You can think of it like an "event api" or a "web callback".</p>
         <p>Semantic differences aside, webhooks exist to receive notifications of events, e.g. a message was posted in a Spark channel.</p>
+      </section>
+      <section>
+        <h2>Chat Bots</h2>
+        <p>A chat bot is essentially an API that responds to events in a chat program. It consists of two parts:</p>
+        <ul>
+          <li class="fragment">Webhook Endpoint to receive event notifications.</li>
+          <li class="fragment">Server Code to process event/respond</li>
+        </ul>
+        <aside class="notes">Webhook must be public!</aside>
+      </section>
+      <section>
+        <h2>Exploring the Cisco Spark API</h2>
+        <ul>
+          <li class="fragment">Create and interact with rooms, search for people, post and retrieve messages.</li>
+          <li class="fragment">Use bot to interact with <em>other</em> APIs to provide rich mashup experiences.</li>
+          <li class="fragment">https://developer.ciscospark.com/index.html</li>
+        </ul>
+        <aside class="notes">Do the Curl then explore the docs</aside>
+      </section>
+      <section>
+        <h2>Ngrok</h2>
+        if you restart ngrok you have to update the endpoint url. not persistent.
+      </section>
+      <section>
+        <h2>Creating a Simple Chat Bot</h2>
+        flint
+      </section>
+      <section>
+        <h2>Botkit</h2>
+      </section>
+      <section>
+        <h2>Project</h2>
+        <p>Upgrade your Chat Bot to respond to more than one command, and to interact with a third-party API.</p>
       </section>
     </div>
   </div>

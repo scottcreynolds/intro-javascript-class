@@ -51,6 +51,7 @@
           <li class="fragment">Learn to use JavaScript on the server</li>
           <li class="fragment">Learn to use JavaScript to create Spark bots</li>
         </ul>
+        <aside class="notes">not going to make you an expert but you should be able to get in there and get some things done.</aside>
       </section>
       <section>
         <h1>Tools</h1>
@@ -59,7 +60,7 @@
           <li class="fragment">Browser with Dev Tools (Google Chrome)</li>
           <li class="fragment">REPL (repl.it)</li>
           <br>
-          <li class="fragment">Later we'll add other tools as we explore more advanced topics (Postman, ngrok, node)</li>
+          <li class="fragment">Later we'll add other tools as we explore more advanced topics (Postman, ngrok, Node, etc.)</li>
           <aside class="notes">If needed, take time to install and set up the main tools.</aside>
         </ul>
       </section>
@@ -148,7 +149,7 @@
         <p>Multi-line statements (<em>blocks</em>) are bound by braces</p>
         <pre><code>if(true) {
   console.log("true!");
-}</code></pre><hr>
+}</code></pre>
         <pre><code>//this is a comment</code></pre>
         <pre><code>/* this is a
  multi-line
@@ -159,7 +160,7 @@
         <h2>Style guidelines</h2>
         <ul>
           <li>use camelCase for multi-word variable names, otherwise lower case</li>
-          <li>open braces on same line</li>
+          <li>open braces on same line as block declaration</li>
           <li>upper case/PascalCase for object names</li>
           <li>descriptive naming always</li>
           <li>obey Principle of Least Surprise</li>
@@ -170,7 +171,7 @@
         <ul>
           <li class="fragment">No - ASI handles it (this is why braces on same line)</li>
           <li class="fragment">Uh, yes, ASI inserts them because they're required</li>
-          <li class="fragment">Definitely when separating statements on the same line (not common, except in for loops)<br><pre><code>for(var i=0; i&lt;10; i++;)</code></pre></li>
+          <li class="fragment">Definitely when separating statements on the same line (not common, except in for loops)<br><pre><code>for(var i=0; i&lt;10; i++)</code></pre></li>
           <li class="fragment">I'm gonna use them because that's how I was raised but sometimes I'll leave them out because people can change</li>
           <li class="fragment">Follow team/codebase convention</li>
         </ul>
@@ -182,7 +183,7 @@
         <pre class="fragment"><code>var i = 0; //declare and init variable</code></pre>
         <pre class="fragment"><code>let i = 0; //(ES6) declare variable in local scope</code></pre>
         <pre class="fragment"><code>const i = 0; //(ES6) declare constant in local scope</code></pre>
-        <pre class="fragment"><code>i = 0; //Yikes.</code></pre>
+        <pre class="fragment"><code>newVar = 0; //Yikes. No globals!</code></pre>
         <aside class="notes">i=0 not automatically global, goes up chain looking for variable then assigns to global object if not found</aside>
       </section>
       <section>
@@ -197,8 +198,8 @@ console.log(i);
 i = "bye";
 console.log(i);</code></pre>
 <pre class="fragment"><code>const a = "b";
-a = c;
-//const c;</code></pre>
+a = "c";
+//const c; - what happens?</code></pre>
       </section>
       <section>
         <h2>Primitive Data Types</h2>
@@ -211,8 +212,7 @@ a = c;
       </section>
       <section>
         <h4>Try It</h4>
-        <pre>
-        <code>
+        <pre><code>
         var fruit = "banana";
         var pi;
 
@@ -221,9 +221,10 @@ a = c;
 
         pi === undefined; //true
         pi === null; //false
-        </code>
-        </pre>
+        </code></pre>
         <pre class="fragment"><code>typeof(Fruit); // ???</code></pre>
+        <pre class="fragment"><code>pi = 3.14;
+typeof(pi); //?</code></pre>
         <aside class="notes">get into conversion for ints/floats/higher data types later. js case-sensitive</aside>
       </section>
       <section>
@@ -260,7 +261,7 @@ sentence.indexOf("Joe"); // -1
 sentence.includes("Scott"); // ES6</code></pre>
 <pre class="fragment"><code>sentence.replace("Scott", "Joe"); //Hi, I'm Joe
 console.log(sentence); // what will we get?</code></pre>
-        <p class="fragment">Most methods do not alter the original object.</p>
+        <p class="fragment">Most string methods do not alter the original object.</p>
         <pre class="fragment"><code>let newSentence = sentence.replace("Scott", "Joe");</code></pre>
       </section>
       <section>
@@ -288,6 +289,7 @@ padded = padded.trim();</code></pre>
 /\w+/ //matches on one or more word chars</code>
 </pre>
         <p>See <a href="http://rubular.com">Rubular.com</a> for more.</p>
+        <aside class="notes">reGex or rejex but never REgex like dude in episode of iZombie</aside>
       </section>
       <section>
         <h2>Working with Strings</h2>
@@ -343,8 +345,7 @@ var y = x++; //y = ? x = ?
 var a = 2;
 var b = ++a; //b = ? a = ?
 </code></pre>
-        <p class="fragment">We use postfix (x++) in loops to operate on <em>current</em> x
-        and then increment at the end of the iteration.</p>
+        <p class="fragment">We use postfix (x++) in loops to operate on <em>current</em> x and then increment at the end of the iteration.</p>
       </section>
       <section>
         <h2>Type Coercion</h2>
@@ -432,14 +433,14 @@ Number(c);</code></pre>
         <h2>Working with Booleans</h2>
         <h4>Boolean Logic</h4>
         <pre><code>
-        // && (and) - true if both expressions true
-        1 &gt; 0 && 1 &lt; 2; // true
+        // &amp;&amp; (and) - true if both expressions true
+        1 &gt; 0 &amp;&amp; 1 &lt; 2; // true
 
         // || (or) - true if either expression true
         1 &gt; 0 || 1 &gt; 2; // true
 
         // ! - negation
-        !(1 &gt; 0 && 1 &lt; 2); // false
+        !(1 &gt; 0 &amp;&amp; 1 &lt; 2); // false
         </code>Negation is valid but usually can be rewritten
 to be more readable.</pre>
       </section>
@@ -457,7 +458,6 @@ to be more readable.</pre>
         </code></pre>
       </section>
       <section>
-        <h2>Making Decisions</h2>
         <h4>if/else if</h4>
         <pre><code>
         let a = 2;
@@ -472,7 +472,6 @@ to be more readable.</pre>
         </code></pre>
       </section>
       <section>
-        <h2>Making Decisions</h2>
         <h4>Switch</h4>
 <pre class="fragment"><code>if(x === y) {
   // do something
@@ -497,7 +496,6 @@ switch(mood) {
  }</code></pre>
       </section>
       <section>
-        <h2>Making Decisions</h2>
         <h4>Ternary Operator</h4>
         <p>Sometimes it's nice to condense things to one line:</p>
         <pre class="fragment"><code>var x = 0;
@@ -506,6 +504,31 @@ x > 0 ? "More!" : "Not More!"; //what output?
 
 //always err on the side of readability
 (typeOf(x) === Number &amp;&amp; x > 0) ? document.getElementById(x) : document.getElementsByClassName(x)[0];</code></pre>
+      </section>
+      <section>
+        <h4>JavaScript Operations Quiz</h4>
+        <pre class="fragment"><code>var x = 0
+var y = false
+if (x == y) {
+  console.log("hmmm")
+} else {
+  console.log("okay")
+} //what is output?</code></pre>
+        <pre class="fragment"><code>21 % 5 //?</code></pre>
+        <pre class="fragment"><code>var x=1;
+var y = x++; //what is x? y?
+var z = ++y; //what is z? y?</code></pre>
+<pre class="fragment"><code>"string".indexOf(r); //?</code></pre>
+      </section>
+      <section>
+        <h4>JavaScript Operations Quiz</h4>
+        <ul>
+          <li class="fragment">What would I use to validate the format of a string?</li>
+          <li class="fragment">What is the name of what happens in this line: <code>"every" + 1;</code></li>
+          <li class="fragment">How would we do <em>explicit</em> coercion in the previous line?</li>
+          <li class="fragment">What is the type and value of an intentionally empty variable?</li>
+          <li class="fragment">What is the type and value of an unassigned variable?</li>
+        </ul>
       </section>
       <section>
         <h2>Arrays</h2>
@@ -545,8 +568,7 @@ arr.splice(4,1); // remove 1 item starting at index 4
       <section>
         <h2>Array Operations</h2>
         <h4>Manipulating Arrays</h4>
-        <pre class="fragment">
-        <code>
+        <pre class="fragment"><code>
         let arr = ["one", "two"];
 
         arr.reverse();
@@ -558,8 +580,7 @@ arr.splice(4,1); // remove 1 item starting at index 4
         let arrStr = "three,four,five";
         arr = arrStr.split(','); // ["three", "four", "five"]
         newStr = arr.join(':'); // "three:four:five"
-        </code>
-        </pre>
+        </code></pre>
       </section>
       <section>
         <h4>Array Practice</h4>
@@ -599,8 +620,7 @@ solarSystem.indexOf("Earth");
         <h2>Loops</h2>
         <h4>while...</h4>
         <p>You can think of a <code>while</code> loop as an <code>if</code> statement that repeats while it returns true. Useful when we can't predict the number of loops we need to execute.</p>
-        <pre class="fragment">
-        <code>
+        <pre class="fragment"><code>
         var now = Date.now();
         while(now % 2 !== 0) {
           console.log("not yet");
@@ -620,8 +640,7 @@ solarSystem.indexOf("Earth");
 
         do {
           console.log("but this will execute once");
-        } while(test);</code>
-        </pre>
+        } while(test);</code></pre>
       </section>
       <section>
         <h2>Loops</h2>
@@ -637,6 +656,21 @@ solarSystem.indexOf("Earth");
         <aside class="notes">Note semicolon use, initialization, i standard for iterator</aside>
       </section>
       <section>
+        <h4>Loop Quiz</h4>
+        <small><ul>
+          <li class="fragment">What loop would I use to calculate the balance of all customers' accounts?</li>
+          <li class="fragment">What loop would I use to output the progress of a long-running operation?</li>
+        </ul></small>
+        <pre class="fragment"><code>//when will this stop executing?
+while(true) {
+  console.log(Date.now())
+}</code></pre>
+      <pre class="fragment"><code>//what gets logged?
+var x = 0;
+do {
+  x++
+  console.log(x);
+} while (x === 0)</code></pre>
       </section>
       <section>
         <h2>Executing in the Browser</h2>
@@ -657,10 +691,8 @@ solarSystem.indexOf("Earth");
         <pre class="fragment"><code>&lt;head&gt;
   &lt;script src="class.js"&gt;&lt;/script&gt;
 &lt;/head&gt;</code></pre>
-        <pre class="fragment"><code>
-        //inside class.js
-        console.log("and this is linked javascript");
-        </code></pre>
+        <pre class="fragment"><code>//inside class.js
+console.log("and this is linked javascript");</code></pre>
         <p class="fragment">Any time you need to use an external library or maintain a non-trivial amount of code, you'll be linking separate files. Inline js is used sparingly.</p>
         <aside class="notes">order of execution and linking is important.</aside>
       </section>
@@ -668,16 +700,15 @@ solarSystem.indexOf("Earth");
         <h2>Basic Interactivity</h2>
         <p>Alerts and prompts can be quick and easy ways to collect and display data in the browser.</p>
         <h4 class="fragment">Try It</h4>
-        <pre class="fragment"><code>
-          // class.js
-          let answer = prompt("Hey, what's your name?");
-          alert(answer);
-        </code></pre>
+        <pre class="fragment"><code>// class.js
+let answer = prompt("Hey, what's your name?");
+alert(answer);</code></pre>
       </section>
       <section>
         <h2>Exercises</h2>
         <h4>Convert Celsius to Farenheit</h4>
         <p>Write a program that prompts for a temperature in celsius and alerts the temperature converted to farenheit.</p>
+        <small><p>Yes, you have to google the formula.</p></small>
         <pre class="fragment"><code>var celsius = prompt("Enter a temperature in celsius")
 var farenheit = celsius * 9 / 5 + 32;
 var message = `${celsius} celsius is ${farenheit} farenheit`;
@@ -695,6 +726,7 @@ if(position === -1) {
 } else {
   alert(fave + " is  number " + String(position + 1));
 }</code></pre>
+      <aside class="notes">why position === -1 instead of pos < 0? prefer explicit and precision values.</aside>
       </section>
       <!--                intermediate language-->
       <section>
@@ -718,11 +750,11 @@ if(position === -1) {
       <section>
         <h2>Function Arguments</h2>
         <p>Functions can be called with data, or arguments, that are used in the execution of the function.</p>
-        <pre><code>        function sayHi(name) {
-          console.log("hi " + name);
-        }
+        <pre><code>function sayHi(name) {
+  console.log("hi " + name);
+}
 
-        sayHi("Scott");</code></pre>
+sayHi("Scott");</code></pre>
         <pre class="fragment"><code>function addNumbers(num1, num2) {
   let result = num1 + num2;
   console.log(result);
@@ -803,6 +835,7 @@ console.log(inner); //can't get there</code></pre>
   console.log(letBlock); //can't get there
 }
 testScope();</code></pre>
+      <aside class="notes">JavaScript is Function Scoped but let gives block scope</aside>
       </section>
       <section>
         <h2>Function Practice</h2>
@@ -941,8 +974,8 @@ function Car(color, make, model, doors){
 }
 var corvette = new Car("Red", "Chevy", "Corvette", 2);
 console.log(corvette);
-corvette.start();
-        </code></pre>
+corvette.start();</code></pre>
+      <aside class="notes">new makes it special, not the function. Regular function. Why? a function is an object. We'll come back to it.</aside>
       </section>
       <section>
         <h4>Object Lab</h4>
@@ -1083,8 +1116,8 @@ function changeDiv() {
       </section>
       <section>
         <h2>Unobtrusive Event Listeners</h2>
-        <pre><code>&lt;div class="nav" onmouseover="changeNav();"&gt;Div 1&lt;/div&gt;
-&lt;div class="nav" onmouseover="changeNav();"&gt;Div 2&lt;/div&gt;</code></pre>
+        <pre><code>&lt;div class="nav" click="changeNav();"&gt;Div 1&lt;/div&gt;
+&lt;div class="nav" click="changeNav();"&gt;Div 2&lt;/div&gt;</code></pre>
         <pre><code>function changeNav() {
   var idk = document.....????
 }</code></pre>
@@ -1093,7 +1126,7 @@ function changeDiv() {
         <pre><code>//put code where it belongs
 var navs = document.getElementsByClassName('nav');
 for(var i=0; i&lt;navs.length;i++) {
-  navs[i].addEventListener('mouseover', function() {
+  navs[i].addEventListener('click', function() {
     alert(this.innerText);
   })
 }</code></pre>
@@ -1102,7 +1135,7 @@ for(var i=0; i&lt;navs.length;i++) {
       <section>
         <h2>DOM Exercise</h2>
         <ul>
-          <li>Creat a link on a page. When clicked, prompt for a person's name, favorite color, and favorite number.</li>
+          <li>Create a link on a page. When clicked, prompt for a person's name, favorite color, and favorite number.</li>
           <li>Dynamically create a paragraph element displaying their name</li>
           <li>If their favorite number is odd, color their name text their favorite color. If it's even, color the paragraph background their favorite color.</li>
         </ul>
@@ -1237,6 +1270,104 @@ finally {
       <section>
         <h2>Debugging Lab</h2>
         <p>We're going to put everything you've learned so far today to work in this debugging lab. Run the example code, find the errors, and make the program work. You'll need to pay attention to syntax, logic, scope, and everything else we've looked at today to solve it. Good luck!</p>
+      </section>
+      <section>
+        <h2>Questions?</h2>
+      </section>
+      <section>
+        <h2>Advanced Topics</h2>
+      </section>
+      <section>
+        <h2>Arrow Functions</h2>
+        <p><small>Arrow functions are an ES6 feature that provides a new syntax and some new behavior to JavaScript functions.</small></p>
+        <pre class="fragment"><code>var arrowFunction = () => {
+  console.log('I was called!')
+}
+
+var regularFunction = function() {
+  console.log('I was called, too!')
+}
+
+arrowFunction() // 'I was called!'
+regularFunction() // 'I was called, too!'</code></pre>
+      </section>
+      <section>
+        <h2>Arrow Functions</h2>
+        <h4>Arguments</h4>
+        <pre class="fragment"><code>var arrowFunction = (arg1, arg2) => {
+  console.log(arg1, arg2)
+}
+
+arrowFunction('Hey,', 'you!') // 'Hey, you!'
+
+//if only one arg, you can leave off the parens
+var singleArgFunction = arg1 => {
+  console.log(arg1)
+}
+
+singleArgFunction("hi!")</code></pre>
+      </section>
+      <section>
+        <h2>Arrow Functions</h2>
+        <h4>Implicit Return</h4>
+        <pre class="fragment"><code>function square(x) {
+  return x*x;
+}
+
+var arrowSquare = n => n*n
+//only with no body block
+
+square(4) // 16
+arrowSquare(4) // 16</code></pre>
+      </section>
+      <section>
+        <h2>Hoisting</h2>
+        <p>Hoisting is a fancy way of saying that JavaScript will move function and variable declarations to the top of their scope before code execution.</p>
+        <p class="fragment"><em>Declarations</em>, not assignments</p>
+        <pre class="fragment"><code>//when we write
+var x = 0;
+//javascript sees
+var x;
+x = 0;</code></pre>
+      </section>
+      <section>
+        <h2>Hoisting</h2>
+        <pre class="fragment"><code>console.log(hoisted); //what happens?</code></pre>
+        <pre class="fragment"><code>console.log(hoisted);
+
+var hoisted = "hi"; //what happens?</code></pre>
+        <pre class="fragment"><code>var hoisted; //declaration hoisted to top of scope
+console.log(hoisted);
+hoisted = "hi";</code></pre>
+<pre class="fragment"><code>function myFunction(){
+  console.log(word)
+  var word = "cake";
+}//what happens when we myFunction()?</code></pre>
+      <aside class="notes">remind function scope</aside>
+      </section>
+      <section>
+        <h2>Function Hoisting</h2>
+        <pre class="fragment"><code>eat();
+
+function eat(){
+  console.log("time to eat cake!")
+} //whole function hoisted</code></pre>
+      <pre class="fragment"><code>eat();
+
+var eat = function() {
+  console.log("time to eat cake!")
+}</code></pre>
+      </section>
+      <section>
+        <h2>Hoisting Danger</h2>
+        <pre class="fragment"><code>var snack = "granola bar";
+function eat(){
+  console.log(snack);
+  var snack = "snickers";
+}
+eat();</code></pre>
+        <p class="fragment">Most problems can be avoided by using good naming and good organization practices, and <code>let</code> and <code>const</code> rather than <code>var</code></p>
+        <aside class="notes">it re-declared var.</aside>
       </section>
     </div>
   </div>

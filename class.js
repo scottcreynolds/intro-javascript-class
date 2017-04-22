@@ -1,10 +1,7 @@
-$(function() {
- $('.user').on('click', function() {
-    var id = $(this).data("user");
-    console.log($(this).dataset)
-    console.log(id)
-    $.get('https://github/repos/' + user, function(data) {
-      //do something
-    })
+var navs = document.getElementsByClassName('nav');
+for(var i=0; i<navs.length;i++) {
+  console.log(navs[i])
+  navs[i].addEventListener('click', function() {
+    alert(this.innerText);
   })
-});
+}

@@ -151,6 +151,14 @@ fetch('https://api.github.com/user/repos', {
 }).then(res => res.json()).then(json => console.log(json));</code></pre>
       </section>
 <!-- END PROMISES/ARROWS/FETCH -->
+<!-- EXPRESS ADVANCED -->
+      <section>
+        <h2>Router and Controllers</h2>
+      </section>
+      <section>
+        <h2>Databases with Mongoose</h2>
+      </section>
+<!-- END EXPRESS ADVANCED -->
       <section>
         <h2>Handlebars</h2>
       </section>
@@ -166,17 +174,60 @@ fetch('https://api.github.com/user/repos', {
       <section>
         <h1>Prototypes in Action</h1>reverse string
       </section>
+       <section>
+        <h2>Hoisting</h2>
+        <p>Hoisting is a fancy way of saying that JavaScript will move function and variable declarations to the top of their scope before code execution.</p>
+        <p class="fragment"><em>Declarations</em>, not assignments</p>
+        <pre class="fragment"><code>//when we write
+var x = 0;
+//javascript sees
+var x;
+x = 0;</code></pre>
+      </section>
       <section>
         <h2>Hoisting</h2>
+        <pre class="fragment"><code>console.log(hoisted); //what happens?</code></pre>
+        <pre class="fragment"><code>console.log(hoisted);
+
+var hoisted = "hi"; //what happens?</code></pre>
+        <pre class="fragment"><code>var hoisted; //declaration hoisted to top of scope
+console.log(hoisted);
+hoisted = "hi";</code></pre>
+<pre class="fragment"><code>function myFunction(){
+  console.log(word)
+  var word = "cake";
+}//what happens when we myFunction()?</code></pre>
+      <aside class="notes">remind function scope</aside>
+      </section>
+      <section>
+        <h2>Function Hoisting</h2>
+        <pre class="fragment"><code>eat();
+
+function eat(){
+  console.log("time to eat cake!")
+} //whole function hoisted</code></pre>
+      <pre class="fragment"><code>eat();
+
+var eat = function() {
+  console.log("time to eat cake!")
+}</code></pre>
+      </section>
+      <section>
+        <h2>Hoisting Danger</h2>
+        <pre class="fragment"><code>var snack = "granola bar";
+function eat(){
+  console.log(snack);
+  var snack = "snickers";
+}
+eat();</code></pre>
+        <p class="fragment">Most problems can be avoided by using good naming and good organization practices, and <code>let</code> and <code>const</code> rather than <code>var</code></p>
+        <aside class="notes">it re-declared var.</aside>
       </section>
       <section>
         <h1>This</h1>
       </section>
       <section>
         <h2>Call/Apply</h2>
-      </section>
-      <section>
-        <h2>Lodash</h2>
       </section>
       <section>
         <h2>js console in chrome https://developers.google.com/web/tools/chrome-devtools/console/command-line-reference</h2>
