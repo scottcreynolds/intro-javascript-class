@@ -1,12 +1,18 @@
-// var http = require("http");
+const express = require('express')
+const app = express()
+const bodyParser = require('body-parser')
 
-// http.createServer(function(request, response) {
-//   console.log(request);
-//   response.writeHead(200, {"Content-Type": "text/plain"});
-//   response.write("Hello World");
-//   response.end();
-// }).listen(8888);
+app.use(bodyParser.json());
 
-let square = x => x*x
-// debugger;
-console.log(square(4))
+app.get('/', function(req, res) {
+  res.send('Hello Express!')
+})
+
+app.post('/', function(req,res) {
+  console.log(req.body);
+  res.end("SUCCESS")
+})
+
+app.listen(8888, function() {
+  console.log("Hello, Seattle, I'm listening")
+})

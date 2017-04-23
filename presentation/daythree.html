@@ -204,12 +204,48 @@ node index.js
         <aside class="notes">--save auto adds to dependencies section so npm install works. show that it handles missing routes. add a route. talk about verbs.</aside>
       </section>
       <section>
-        <h2>Making An API</h2>
-        <ul>
-          <li>Use Node and Express to create an API.</li>
-          <li>Create an HTML and jQuery page to consume the API.</li>
-        </ul>
+        <h2>NPM Start Script</h2>
+        //npm start
       </section>
+      <section>
+        <h2>Express Middleware</h2>
+        <p><em>Middleware</em> is a function or functions inserted into Express to act on the request/response objects and provide extra functionality.</p>
+      </section>
+      <section>
+        <h2>Body Parser Middleware</h2>
+        <pre class="fragment"><code>app.post('/', function(req,res) {
+  console.log(req.body);
+  res.end("SUCCESS")
+})</code></pre>
+        <pre class="fragment"><code>const bodyParser = require('body-parser')
+
+app.use(bodyParser.json());
+</code></pre>
+      <pre class="fragment"><code>npm i body-parser</code></pre>
+      <aside class="notes">use postman to test before/after</aside>
+      </section>
+      <section>
+        <h4>Design an API with Postman</h4>
+        <p>Postman is great for testing APIs, but we can also use it to help us drive the design of an API</p>
+        <aside class="notes">use postman, show headers/body, params/query, build requests</aside>
+      </section>
+      <section>
+        <h2>Making An API</h2>
+        <small>
+        <ul>
+          <li>Use Node and Express to create a solar system API.
+            <ul>
+              <li>GET /planets - return planets in solar system</li>
+              <li>GET /solarsystem - return all bodies in solar system</li>
+              <li>POST /includepluto - take a true/false value to determine whether Pluto is included in the /planets response</li>
+            </ul>
+          </li>
+          <li>Create an HTML and jQuery page to consume the API. You can use jQuery or fetch().</li>
+          <li>Bonus: Use handlebars to template the client page.</li>
+        </ul>
+        </small>
+      </section>
+      ////start here
       <section>
         <h2>Consuming APIs in Node</h2>
         <ul>
@@ -249,7 +285,12 @@ node index.js
         flint
       </section>
       <section>
-        <h2>Botkit</h2>
+        <h2>sparky and things you can't do with bot account</h2>
+        bots only "hear" messages that mention them
+        can't read room messages.
+      </section>
+      <section>
+      mixed-mode express api and bot
       </section>
       <section>
         <h2>Project</h2>

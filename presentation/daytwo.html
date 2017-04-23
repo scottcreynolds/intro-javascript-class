@@ -481,11 +481,27 @@ el = document.getElementsByClassName('user')[0]
 el.dataset.user</code></pre>
       </section>
       <section>
+        <h2>Handlebars</h2>
+        <p>Building HTML by hand sucks. Template engines give us a way to dynamically create HTML without having to always do it by hand.</p>
+        <pre class="fragment"><code>&lt;script id="issue-template" type="text/x-handlebars-template"&gt;
+  &lt;article&gt;
+    &lt;header&gt;&lt;h3&gt;Issue #{{number}} ({{state}})&lt;/h3&gt;&lt;/header&gt;
+    &lt;p&gt;{{body}}&lt;/p&gt;
+    &lt;footer&gt;&lt;a href="{{url}}"&gt;created {{created_at}}&lt;/a&gt;&lt;/footer&gt;
+  &lt;/article&gt;
+&lt;/script&gt;</code></pre>
+        <aside class="notes">handlebarsjs.com</aside>
+      </section>
+      <section>
+        <h2>Handlebars</h2>
+      </section>
+      <section>
         <h2>API Lab</h2>
         <p>Go back to your Star Wars API functions from earlier and let's put this all together and upgrade it.</p>
         <ul>
           <li>Create an HTML page. Add a link to get the list of films. Replace your XHR with jQuery AJAX and display just the list of film titles as links.</li>
           <li>When you click the link for a film, retrieve the film's planet and character data and display it on the page. Replace any previous XHR with jQuery.</li>
+          <li>BONUS: Use Handlebars to template your site.</li>
         </ul>
       </section>
       <section>
@@ -572,6 +588,127 @@ $.ajax( {
   console.log(data);
 })</code></pre>
       </section>
+      <!-- PROMISES/ARROWS/FETCH -->
+      <section>
+        <h2>Promises, Promises</h2>
+        <p><small>A Promise object represents a value that may not be available yet, but will be resolved at some point in the future. Essentially, the promise is an object that represents the result of an operation, whenever it occurs. This allows us to write more flexible asynchronous code than simply passing callback functions to asynchronous functions.</small></p>
+        <ul>
+          <li class="fragment">Eliminate "callback hell" and write clean code.</li>
+          <li class="fragment">Decouple from event-driven structures.</li>
+          <li class="fragment">Chain <em>thenable</em> statements for readable structure.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Promise Example</h2>
+        <pre class="fragment"><code>order('Shack Burger')
+  .then(function(order) { //order = returned val from order
+    finishedOrder = order.prepare()
+    return finishedOrder //pass this down the chain
+  })
+  .then(function(food) { //food = returned val from last then
+    serve(food)
+  })
+  .catch(function(err) {
+    console.log("oops")
+  }) //where have we seen this pattern?</code></pre>
+      <pre class="fragment"><code>$.get(uri)
+  .done(function(data) {
+    console.log("success!");
+  })
+  .fail(function(err) {
+    console.log('oops!');
+  })</code></pre>
+      </section>
+      <section>
+        <h2>Arrow Functions</h2>
+        <p><small>Arrow functions are an ES6 feature that provides a new syntax and some new behavior to JavaScript functions.</small></p>
+        <pre class="fragment"><code>var arrowFunction = () => {
+  console.log('I was called!')
+}
+
+var regularFunction = function() {
+  console.log('I was called, too!')
+}
+
+arrowFunction() // 'I was called!'
+regularFunction() // 'I was called, too!'</code></pre>
+      </section>
+      <section>
+        <h2>Arrow Functions</h2>
+        <h4>Arguments</h4>
+        <pre class="fragment"><code>var arrowFunction = (arg1, arg2) => {
+  console.log(arg1, arg2)
+}
+
+arrowFunction('Hey,', 'you!') // 'Hey, you!'
+
+//if only one arg, you can leave off the parens
+var singleArgFunction = arg1 => {
+  console.log(arg1)
+}
+
+singleArgFunction("hi!")</code></pre>
+      </section>
+      <section>
+        <h2>Arrow Functions</h2>
+        <h4>Implicit Return</h4>
+        <pre class="fragment"><code>function square(x) {
+  return x*x;
+}
+
+var arrowSquare = n => n*n
+//only with no body block
+
+square(4) // 16
+arrowSquare(4) // 16</code></pre>
+      </section>
+      <section>
+        <h2>Arrow Functions</h2>
+        <pre class="fragment"><code>order('Shack Burger')
+  .then(function(order) { //order = returned val from order
+    finishedOrder = order.prepare()
+    return finishedOrder //pass this down the chain
+  })
+  .then(function(food) { //food = returned val from last then
+    serve(food)
+  })
+  .catch(function(err) {
+    console.log("oops")
+  })</code></pre>
+  <pre class="fragment"><code>order('Shack Burger')
+  .then(order => order.prepare()) //implicit return
+  .then(food => serve(food))
+  .catch(err => { console.log("oops") })</code></pre>
+      </section>
+      <section>
+        <h2>Putting it Together</h2>
+        <pre class="fragment"><code>fetch('https://api.github.com/repos/jquery/jquery/commits')
+  .then(resp => resp.json())
+  .then(json => console.log(json));</code></pre>
+      </section>
+      <section>
+        <h2>Fetch API</h2>
+        <code>fetch('https://api.github.com/repos/jquery/jquery/commits')
+  .then(resp => resp.json())
+  .then(json => console.log(json));</code></pre>
+        <small><ul>
+          <li class="fragment">Built from the ground up to handle modern web needs, like JSON and streaming.</li>
+          <li class="fragment"><code>fetch()</code>is a global function. No making XHR objects.</li>
+          <li class="fragment">Promise-based.</li>
+          <li class="fragment">Body <em>mixin</em> provides parsing.</li>
+          <li class="fragment">Not supported in IE OF COURSE BECAUSE WHY HAVE NICE THINGS</li>
+        </ul></small>
+      </section>
+      <section>
+        <h2>Authenticated Fetch</h2>
+        <pre class="fragment"><code>const token = 'YOUR_TOKEN_HERE'
+fetch('https://api.github.com/user/repos', {
+  headers: {
+    Authorization: `token ${token}`
+  }
+}).then(res => res.json()).then(json => console.log(json));</code></pre>
+      </section>
+<!-- END PROMISES/ARROWS/FETCH -->
       <section>
         <h4>Easy Code Snippets with Postman</h4>
         <p>You can use Postman to generate your API access code for you!</p>
@@ -583,7 +720,7 @@ $.ajax( {
       <section>
         <h2>AJAX Lab</h2>
         <ul>
-        <li>Pick an API that interests you. Explore it. Create an HTML page that utilizes its functions.</li>
+        <li>Pick an API that interests you. Explore it. Create an HTML page that utilizes its functions. Use jQuery or fetch()</li>
         <li>Bonus: Use data from two or more APIs to create a mashup!</li>
         <small><p>Some APIs of interest: Twitter, Facebook, Foursquare, Darksky, IBM Watson, Github, Google, Meetup, Twilio, Spotify, News API, Battle.net, and a billion more.</p></small>
       </section>

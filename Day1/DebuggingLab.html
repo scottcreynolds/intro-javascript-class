@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Presidio JavaScript Bootcamp Scratchpad</title>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+  <p>On page load, we should see a blank form and the current playlist count. This form should add a new track to the playlist on submit and update the count. Clicking the Show Playlist link should update the list of songs.</p>
+  <form id="mainForm">
+    <label for="songtitle">Song Title:</label><input type="text" id="songtitle" /><br/>
+    <label for="artist">Artist:</label><input type="text" id="artist" /><br/>
+    <input type="submit"/>
+  </form>
+  <p>Playlist Items: <span id="playlistCount"></span></p>
+  <hr>
+  <a href="#" id="showPlaylist">Show Updated Playlist</a>
+  <ul id="playlist"></ul>
+  <script src="DebuggingLab.js"></script>
+</body>
+</html>

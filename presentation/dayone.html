@@ -1080,6 +1080,7 @@ div.getAttribute('class');
 //to set an attribute?
 </code></pre>
       <pre class="fragment"><code>div.setAttribute('class', 'nav');</code></pre>
+      <pre class="fragment"><code>div.style.backgroundColor = "red";</code></pre>
       <pre class="fragment"><code>div.innerText = 'Bye'; //replaced!
 div.innerHTML += '&lt;p&gt;New Paragraph Element&lt;/p&gt; //appended!</code></pre>
       </section>
@@ -1202,8 +1203,8 @@ $(function() {
       <pre class="fragment"><code>$('.clickable').on('click', function() {
   alert($(this).text()); //no more loop
 });</code></pre>
-      <pre class="fragment"><code>$('#link').click(function(){});
-//not great for dynamic pages</code></pre>
+      <pre class="fragment"><code>$('#link').click(function(){}); //not for dynamic pages
+$(parent).on('click', 'a.clickable', function() {})</code></pre>
       </section>
       <section>
         <h2>Forms</h2>
@@ -1319,6 +1320,10 @@ var arrowSquare = n => n*n
 
 square(4) // 16
 arrowSquare(4) // 16</code></pre>
+      </section>
+      <section>
+        <h2>Arrow Function Exercise</h2>
+        <p>Write an arrow function that takes a string argument and returns the reversed string.</p>
       </section>
       <section>
         <h2>Hoisting</h2>
