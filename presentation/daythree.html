@@ -245,13 +245,13 @@ app.use(bodyParser.json());
         </ul>
         </small>
       </section>
-      ////start here
       <section>
         <h2>Consuming APIs in Node</h2>
         <ul>
           <li>Not that different from what we've already done!</li>
           <li>Be mindful of the Request/Response lifecycle.</li>
         </ul>
+        <li class="fragment">show request, fetch, walk through the response.end</li>
       </section>
       <section>
         <h2>Webhooks</h2>
@@ -277,24 +277,48 @@ app.use(bodyParser.json());
         <aside class="notes">Do the Curl then explore the docs</aside>
       </section>
       <section>
-        <h2>Ngrok</h2>
-        if you restart ngrok you have to update the endpoint url. not persistent.
+        <h2>Hosting Bots</h2>
+        <p>ngrok is a tool that lets us tunnel a public request to our private machine. Great for development and testing.</p>
+        <p>For a real bot, you'd host it somewhere publically accessible.</p>
+        <p>Note: If you restart ngrok you have to update the endpoint url. not persistent.</p>
       </section>
       <section>
         <h2>Creating a Simple Chat Bot</h2>
-        flint
+        <ul>
+          <li class="fragment">Register Bot (https://developer.ciscospark.com/add-bot.html)</li>
+          <li class="fragment">Add Bot to Room</li>
+          <li class="fragment"><code>./ngrok http 8888</code></li>
+          <li class="fragment">Get Room Id, Set Up Webhook</li>
+          <li class="fragment">Update Bot Template</li>
+          <li class="fragment">Run it!</li>
+          <li class="fragment">When updating, stop the bot, not ngrok.</li>
+        </ul>
+        <aside class="notes">add the flint.showHelp(), look at other things flint and bot can do. point out being careful with implode.</aside>
       </section>
       <section>
-        <h2>sparky and things you can't do with bot account</h2>
-        bots only "hear" messages that mention them
-        can't read room messages.
+        <h2>Bot Account Limitations</h2>
+        <ul>
+          <li>Bots can only "hear" messages that mention them.</li>
+          <li>Bots are limited in some API functions (can't get room messages)</li>
+        </ul>
+        <p class="fragment">We can use a separate API token, and Sparky, to get around this.</p>
       </section>
       <section>
-      mixed-mode express api and bot
+        <h2>Beyond Just Bot Code</h2>
+        <p>You can combine your bot with other API code (consuming and serving) to really make interesting things happen.</p>
+        <aside class="notes">Full-on integrations out of scope but let's take a little look.</aside>
       </section>
       <section>
         <h2>Project</h2>
-        <p>Upgrade your Chat Bot to respond to more than one command, and to interact with a third-party API.</p>
+        <p>Upgrade your Chat Bot to respond to more than one command, and to interact with a third-party API. You can use APIs from exercises we've already done, like Star Wars or Github, or explore something new!</p>
+      </section>
+      <section>
+        <h2>Questions?</h2>
+      </section>
+      <!-- bonus -->
+      <section>
+        <h2>Other Bot Platforms</h2>
+        <aside class="notes">botkit/cisco</aside>
       </section>
     </div>
   </div>
