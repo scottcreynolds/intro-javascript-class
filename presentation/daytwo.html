@@ -179,7 +179,7 @@ function stopTextColor() {
         <small><p>Let's make a whammy game!</p>
         <ul>
           <li>Make an HTML page with a Start and Stop button. Create an array of prize amounts and "whammies" (e.g. [100, 200, 300, 400, 500, "Whammy!"])</li>
-          <li>When the player clicks Start, kick off a function to randomly generate a number that's a valid index in your array. Live-update the page with the current prize amount.</li>
+          <li>When the player clicks Start, kick off a function to randomly generate a number that's a valid index in your array (i.e. if your array has 10 items, a number between 0 and 9). Live-update the page with the current prize amount.</li>
           <li>When the player clicks Stop, cancel the game timer and show them what they've won! Or lost!</li>
           <li>Keep a running total of the score that gets wiped out if you land on Whammy.</li>
         </ul></small>
@@ -205,12 +205,13 @@ function stopTextColor() {
       </section>
       <section>
         <h2>Web APIs</h2>
-        <p>Many web appliations provide APIs to subsets of their data and functionality, allowing developers the freedom to create new applications by combining available data. For some, it's their whole business model.</p>
+        <small><p>Many web appliations provide APIs to subsets of their data and functionality, allowing developers the freedom to create new applications by combining available data. For some, it's their whole business model.</p>
         <ul>
           <li class="fragment">Social APIs: Twitter, Facebook, Foursquare, Meetup, YouTube, Spotify.</li>
           <li class="fragment">Utility APIs: Github, Google Maps, Twilio, Stripe, Mailchimp, Slack, Spark, Outlook.</li>
           <li class="fragment">Authentication APIs: Google, Facebook, Twitter, Amazon, Tumblr, a forever amount more.</li>
         </ul>
+        </small>
       </section>
       <section>
         <h2>Some Interesting APIs</h2>
@@ -233,15 +234,17 @@ function stopTextColor() {
       </section>
       <section>
         <h2>REST</h2>
+        <small>
         <ul>
           <li class="fragment">Representational State Transfer</li>
-          <li class="fragment"><small>Using a predictable resource-focused URI to communicate with the server.</small></li>
-          <small><li class="fragment"><code>https://api.site.com/resource/action/filter</code></li></small>
+          <li class="fragment">Using a predictable resource-focused URI to communicate with the server.</li>
+          <li class="fragment"><code>https://api.site.com/resource/action/filter</code></li>
           <li class="fragment">Resource: noun that represents a system object (e.g. user)</li>
           <li class="fragment">Action: what to do to the resource (retrieve/create/update)</li>
           <li class="fragment">Filter: any sort of query/filter on the data (e.g. id)</li>
           <li class="fragment">Most API endpoints are a combination of a VERB + URI. GET /users = retrieve all users. POST /users = create new user (why /users?)</li>
         </ul>
+        </small>
         <aside class="notes">/users is the resource
         look at the routes for swapi again, then look at params for memegen</aside>
       </section>
@@ -360,14 +363,15 @@ console.log(xmlDoc.getElementsByTagName('title')[0].innerHTML)</code></pre>
         <h2>Getting Data with XHR</h2>
         <p><small>Let's use XHR to explore the Github API. https://developer.github.com/v3/repos/#list-user-repositories</small></p>
         <pre class="fragment"><code>//type in network tab
-const req = new HMLHttpRequest() // get new XHR request object
-req.open("GET", 'https://api.github.com/users/octocat/repos') // "open" (but don't activate) request
-req.send() // actually send request to server</code></pre>
+// get new XHR request object
+const req = new HMLHttpRequest()
+// "open" (but don't activate) request
+req.open("GET", 'https://api.github.com/users/octocat/repos')
+// execute the request
+req.send()</code></pre>
       <aside class="notes">explore network tab, explore gh api a little</aside>
       </section>
       <section>
-      xhr -> jquery -> promises -> fetch
-      github api exercises each time, modularity of function
         <h4>Handling XHR Responses</h4>
         <pre class="fragment"><code>function showRepositories(event, data) {
   //"this" = XMLHttpRequest object that fired the event
@@ -377,14 +381,14 @@ req.send() // actually send request to server</code></pre>
 
 function getRepositories() {
   const req = new XMLHttpRequest()
-  req.addEventListener("load", showRepositories); //what is showRepositories?
+  req.addEventListener("load", showRepositories);
+  //what is showRepositories?
   req.open("GET", 'https://api.github.com/users/octocat/repos')
   req.send()
 }</code></pre>
       <pre class="fragment"><code>function showRepositories(event, data) {
   console.log(JSON.parse(this.responseText));
-}
-</code></pre>
+}</code></pre>
       </section>
       <section>
         <h2>XHR Exercise</h2>
@@ -483,7 +487,10 @@ el.dataset.user</code></pre>
       <section>
         <h2>Handlebars</h2>
         <p>Building HTML by hand sucks. Template engines give us a way to dynamically create HTML without having to always do it by hand.</p>
-        <pre class="fragment"><code>&lt;script id="issue-template" type="text/x-handlebars-template"&gt;
+        <pre class="fragment"><code><main id="main">
+  <a href="#" onclick="loadIssues();">Load Github Issue</a>
+</main>
+&lt;script id="issue-template" type="text/x-handlebars-template"&gt;
   &lt;article&gt;
     &lt;header&gt;&lt;h3&gt;Issue #{{number}} ({{state}})&lt;/h3&gt;&lt;/header&gt;
     &lt;p&gt;{{body}}&lt;/p&gt;
@@ -494,6 +501,57 @@ el.dataset.user</code></pre>
       </section>
       <section>
         <h2>Handlebars</h2>
+        <pre><code>function loadIssue() {
+  var issue = {
+    state: "closed",
+    number: 5,
+    created_at: "2017-03-31 16:23:13 UTC",
+    body: "Instructions say GET but it's a POST"
+  }
+
+  var template = Handlebars.compile(document.getElementById("issue-template").innerHTML);
+  var result = template(issue);
+  document.getElementsByTagName("main")[0].innerHTML += result;
+}</code></pre>
+      <aside class="notes">fake our own data to test before calling api. wire it up and go!</aside>
+      </section>
+      <section>
+        <h2>Handlebars Helpers</h2>
+        <h4>{{each}}</h4>
+        <pre class="fragment"><code><script id="issue-template" type="text/x-handlebars-template">
+  {{#each this}}
+  <article>
+    <header><h3>Issue #{{number}} ({{state}})</h3></header>
+    <p>{{body}}</p>
+    <footer><a href="{{url}}">created {{created_at}}</a></footer>
+  </article>
+  {{/each}}
+</script></code></pre>
+      <pre class="fragment"><code>function loadIssues() {
+  var template = Handlebars.compile(document.getElementById("issue-template").innerHTML);
+  var result = template(issues);
+  document.getElementsByTagName("main")[0].innerHTML += result;
+}</code></pre>
+      <aside class="notes">block-level helper. need # and / to mark start and end like braces or tags</aside>
+      </section>
+      <section>
+        <h2>Handlebars Helpers</h2>
+        <h4>{{if}}</h4>
+        <pre class="fragment"><code><script id="issue-template" type="text/x-handlebars-template">
+  {{#each this}}
+  <article>
+    <header><h3>Issue #{{number}} ({{state}})</h3></header>
+    <p>{{body}}</p>
+    {{#if comments_count}}
+    <p>{{comments_count}} Comments</p>
+    {{else}}
+    <p>No Comments Yet</p>
+    {{/if}}
+    <footer><a href="{{url}}">created {{created_at}}</a></footer>
+  </article>
+  {{/each}}
+</script></code></pre>
+      <aside class="notes">You'll notice this isn't a full expression like you might use in a regular if statement. You can only give if a value from the context object, and if that value evaluates falsy (false, undefined, null, 0, "", or []) then Handlebars won't render the block. In this case, since comments_count is an integer, we can rely on a zero-comments object not rendering this block.</aside>
       </section>
       <section>
         <h2>API Lab</h2>
@@ -663,7 +721,7 @@ square(4) // 16
 arrowSquare(4) // 16</code></pre>
       </section>
       <section>
-        <h2>Arrow Functions</h2>
+        <h4>Arrow Functions and Promises</h4>
         <pre class="fragment"><code>order('Shack Burger')
   .then(function(order) { //order = returned val from order
     finishedOrder = order.prepare()
@@ -681,14 +739,14 @@ arrowSquare(4) // 16</code></pre>
   .catch(err => { console.log("oops") })</code></pre>
       </section>
       <section>
-        <h2>Putting it Together</h2>
+        <h2>Which Leads Us To</h2>
         <pre class="fragment"><code>fetch('https://api.github.com/repos/jquery/jquery/commits')
   .then(resp => resp.json())
   .then(json => console.log(json));</code></pre>
       </section>
       <section>
         <h2>Fetch API</h2>
-        <code>fetch('https://api.github.com/repos/jquery/jquery/commits')
+        <pre><code>fetch('https://api.github.com/repos/jquery/jquery/commits')
   .then(resp => resp.json())
   .then(json => console.log(json));</code></pre>
         <small><ul>
