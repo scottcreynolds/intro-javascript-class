@@ -30,6 +30,58 @@
         <h2>Introduction to JavaScript</h2>
         <h4>Advanced JavaScript</h4>
       </section>
+<!-- OBJECTS -->
+<section>
+        <h4>Constructor Functions</h4>
+        <p>The real power of objects is in the ability to define them generically and reuse them, such as the <code>Date</code> object.</p>
+        <pre><code>// by convention, constructor functions are upper case
+function Car(color, make, model, doors){
+  this.color = color; // this = the instance when new is used
+  this.make = make;
+  this.model = model;
+  this.doors = doors;
+  this.engine = ""; // define something to be assigned later
+  this.start = function() {
+    console.log("vroom");
+  }
+}
+var corvette = new Car("Red", "Chevy", "Corvette", 2);
+console.log(corvette);
+corvette.start();</code></pre>
+      <aside class="notes">new makes it special, not the function. Regular function. Why? a function is an object. We'll come back to it.</aside>
+      </section>
+      <section>
+        <h4>Object Lab</h4>
+        <ul>
+          <li>Use a constructor function to define a <code>Book</code> object with properties Title and Author.</li>
+          <li>Define a <code>Bookworm</code> object with a Name and a collection of books that the bookworm wants to read.</li>
+          <li>Add a method to the Bookworm to print all the book titles they want to read.</li>
+          <li>Prompt for the Bookworm's name, then instantiate a new Bookworm object and assign 3 books.</li>
+          <li>Call the method to print the list of book titles to read.</li>
+        </ul>
+      </section>
+      <section>
+        <h4>Object Lab Solution</h4>
+        <pre><code>function Book(title, author) {
+  this.title = title;
+  this.author = author;
+}
+function Bookworm(name) {
+  this.name = name;
+  this.bookList = [];
+  this.printBooks = function() {
+    for(let i=0;i&lt;this.bookList.length;i++) {
+      console.log(this.bookList[i].title);
+    }
+  }
+}
+
+let bookworm = new Bookworm(prompt("What is your name?"));
+bookworm.bookList.push(new Book("1984", "George Orwell"));
+bookworm.bookList.push(new Book("Choke", "Pahlaniuk"));
+bookworm.printBooks();
+        </code></pre>
+      </section>
 <!-- PROMISES/ARROWS/FETCH -->
       <section>
         <h2>Promises, Promises</h2>
