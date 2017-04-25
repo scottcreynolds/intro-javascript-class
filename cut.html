@@ -351,4 +351,157 @@ fetch('https://api.github.com/user/repos', {
   {{/each}}
 </script></code></pre>
       <aside class="notes">You'll notice this isn't a full expression like you might use in a regular if statement. You can only give if a value from the context object, and if that value evaluates falsy (false, undefined, null, 0, "", or []) then Handlebars won't render the block. In this case, since comments_count is an integer, we can rely on a zero-comments object not rendering this block.</aside>
-      </section
+      </section>
+
+      <section>
+        <h2>Asynchronous Operations</h2>
+        <p>Asynchronous code allows you to "kick off" an operation and then let the program continue without waiting for that operation to complete. Some uses for asynchronous code:</p>
+        <ul>
+          <li class="fragment">Long-running operations like reading or generating big data sets.</li>
+          <li class="fragment">Operations that cross system boundaries or require external resources.</li>
+          <li class="fragment">Operations that don't need to complete before the user moves on to other tasks.</li>
+        </ul>
+      </section>
+      <section>
+        <h4>setTimeout()</h4>
+        <p>The setTimeout() function sets a timer that executes the specified callback function after the timer expires.</p>
+        <pre class="fragment"><code>var timeoutID;
+function slowAlert() {
+  alert('That was really slow!');
+}
+
+function clearAlert() {
+  //cancels the timer
+  window.clearTimeout(timeoutID);
+}
+
+// hold a reference to the timer if we need to cancel
+timeoutID = window.setTimeout(slowAlert, 2000);
+// with anon func instead of callback
+window.setTimeout(function() {
+    alert('That was really slow!');
+}, 2000);
+</code></pre>
+      <aside class="notes">more readable with callbacks</aside>
+      </section>
+      <section>
+        <h4>setInterval()</h4>
+        <p>The setInterval() function repeatedly calls a function with a fixed time delay between each call.</p>
+        <pre class="fragment"><code>&lt;div id='box'&gt;Hello&lt;/div&gt;
+
+var intervalId;
+function changeColor() {
+  intervalId = setInterval(flashText, 1000);
+}
+
+function flashText() {
+  var box = document.getElementById('box');
+  //what operator?
+  box.style.color = box.style.color == 'red' ? 'blue' : 'red';
+}
+
+function stopTextColor() {
+  clearInterval(intervalId);
+}</code></pre>
+      </section>
+      <section>
+        <h2>Async Lab</h2>
+        <small><p>Let's make a whammy game!</p>
+        <ul>
+          <li>Make an HTML page with a Start and Stop button. Create an array of prize amounts and "whammies" (e.g. [100, 200, 300, 400, 500, "Whammy!"])</li>
+          <li>When the player clicks Start, kick off a function to randomly generate a number that's a valid index in your array (i.e. if your array has 10 items, a number between 0 and 9). Live-update the page with the current prize amount.</li>
+          <li>When the player clicks Stop, cancel the game timer and show them what they've won! Or lost!</li>
+          <li>Keep a running total of the score that gets wiped out if you land on Whammy.</li>
+        </ul></small>
+        <aside class="notes">The faster it goes, the harder it is!</aside>
+      </section>
+
+            <section>
+        <h2>Functions Review</h2>
+        <pre class="fragment"><code>function say(x) {
+  console.log(x);
+}</code></pre>
+        <ul>
+          <li class="fragment">Functions are data.</li>
+          <li class="fragment">Functions are portable.</li>
+        </ul>
+          <pre class="fragment"><code>let func = function(x) {
+  console.log(x);
+}
+func("hi");</code></pre>
+      <aside class="notes">say vs say()</aside>
+      </section>
+      <section>
+        <h2>Functions as Arguments</h2>
+        <pre class="fragment"><code>let add = function(x,y) {
+  return x+y;
+}
+let subtract = function(x,y) {
+  return x-y;
+}
+let doMath = function(x,y,mathFunction) {
+  return mathFunction(x,y);
+}
+doMath(3,2,add);
+doMath(3,2,subtract);</code></pre>
+      </section>
+      <section>
+        <h2>Callback Functions</h2>
+        <p>Callback Functions are used to provide a way for an active function to pass its results to another function, often after a long-running or asynchronous operation.</p>
+        <pre class="fragment"><code>let finished = function(data) {
+    console.log(data);
+}
+let startOperation = function(done) {
+    for(var i=0;i&lt;100000;i++) {
+        //dosomething
+    }
+    done(i);
+}
+startOperation(finished);</code></pre>
+      </section>
+      <section>
+        <h4>You've Seen Callback Functions Before</h4>
+        <pre class="fragment"><code>$('#elem').on('click', function() {
+  //this anonymous function is a callback
+})
+$(document).ready(function() {
+  //as is this
+})
+</code></pre>
+      <pre class="fragment"><code>function clickHandler() {
+  //do the event handling here
+}
+$('#elem').on('click', clickHandler);</code></pre>
+      </section>
+<!-- PROMISES/ARROWS/FETCH -->
+      <section>
+        <h2>Promises, Promises</h2>
+        <p><small>A Promise object represents a value that may not be available yet, but will be resolved at some point in the future. Essentially, the promise is an object that represents the result of an operation, whenever it occurs. This allows us to write more flexible asynchronous code than simply passing callback functions to asynchronous functions.</small></p>
+        <ul>
+          <li class="fragment">Eliminate "callback hell" and write clean code.</li>
+          <li class="fragment">Decouple from event-driven structures.</li>
+          <li class="fragment">Chain <em>thenable</em> statements for readable structure.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Promise Example</h2>
+        <pre class="fragment"><code>order('Shack Burger')
+  .then(function(order) { //order = returned val from order
+    finishedOrder = order.prepare()
+    return finishedOrder //pass this down the chain
+  })
+  .then(function(food) { //food = returned val from last then
+    serve(food)
+  })
+  .catch(function(err) {
+    console.log("oops")
+  }) //where have we seen this pattern?</code></pre>
+      <pre class="fragment"><code>$.get(uri)
+  .done(function(data) {
+    console.log("success!");
+  })
+  .fail(function(err) {
+    console.log('oops!');
+  })</code></pre>
+      </section>
+<!-- END PROMISES/ARROWS/FETCH -->
