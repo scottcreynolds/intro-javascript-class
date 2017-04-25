@@ -1,0 +1,282 @@
+<section>
+        <h2>Manipulating the DOM</h2>
+        <pre><code>var div = document.getElementById('findMe');
+div.getAttribute('class');
+
+//by principle of least surprise, what's the method
+//to set an attribute?
+</code></pre>
+      <pre class="fragment"><code>div.setAttribute('class', 'nav');</code></pre>
+      <pre class="fragment"><code>div.style.backgroundColor = "red";</code></pre>
+      <pre class="fragment"><code>div.innerText = 'Bye'; //replaced!
+div.innerHTML += '&lt;p&gt;New Paragraph Element&lt;/p&gt; //appended!</code></pre>
+      </section>
+      <section>
+        <h2>Manipulating the DOM</h2>
+        <pre class="fragment"><code>var newDiv = document.createElement('div');
+newDiv.innerText = "I am a new div!";
+document.body.appendChild(newDiv);</code></pre>
+        <pre class="fragment"><code>var newParagraph = document.createElement('p');
+var paragraphText = document.createTextNode('New Paragraph!');
+newParagraph.appendChild(paragraphText);
+document.body.appendChild(newParagraph);</code></pre>
+      </section>
+<section>
+        <h2>DOM Exercise</h2>
+        <ul>
+          <li>Create a link on a page. When clicked, prompt for a person's name, favorite color, and favorite number.</li>
+          <li>Dynamically create a paragraph element displaying their name</li>
+          <li>If their favorite number is odd, color their name text their favorite color. If it's even, color the paragraph background their favorite color.</li>
+        </ul>
+      </section>
+<section>
+        <h2>Debugging Lab</h2>
+        <p>We're going to put everything you've learned so far today to work in this debugging lab. Run the example code, find the errors, and make the program work. You'll need to pay attention to syntax, logic, scope, and everything else we've looked at today to solve it. Good luck!</p>
+      </section>
+      <section>
+        <h2>Questions?</h2>
+      </section>
+      <section>
+        <h2>Advanced Topics</h2>
+      </section>
+      <section>
+        <h2>Arrow Functions</h2>
+        <p><small>Arrow functions are an ES6 feature that provides a new syntax and some new behavior to JavaScript functions.</small></p>
+        <pre class="fragment"><code>var arrowFunction = () => {
+  console.log('I was called!')
+}
+
+var regularFunction = function() {
+  console.log('I was called, too!')
+}
+
+arrowFunction() // 'I was called!'
+regularFunction() // 'I was called, too!'</code></pre>
+      </section>
+      <section>
+        <h2>Arrow Functions</h2>
+        <h4>Arguments</h4>
+        <pre class="fragment"><code>var arrowFunction = (arg1, arg2) => {
+  console.log(arg1, arg2)
+}
+
+arrowFunction('Hey,', 'you!') // 'Hey, you!'
+
+//if only one arg, you can leave off the parens
+var singleArgFunction = arg1 => {
+  console.log(arg1)
+}
+
+singleArgFunction("hi!")</code></pre>
+      </section>
+      <section>
+        <h2>Arrow Functions</h2>
+        <h4>Implicit Return</h4>
+        <pre class="fragment"><code>function square(x) {
+  return x*x;
+}
+
+var arrowSquare = n => n*n
+//only with no body block
+
+square(4) // 16
+arrowSquare(4) // 16</code></pre>
+      </section>
+      <section>
+        <h2>Arrow Function Exercise</h2>
+        <p>Write an arrow function that takes a string argument and returns the reversed string.</p>
+      </section>
+      <section>
+        <h2>Hoisting</h2>
+        <p>Hoisting is a fancy way of saying that JavaScript will move function and variable declarations to the top of their scope before code execution.</p>
+        <p class="fragment"><em>Declarations</em>, not assignments</p>
+        <pre class="fragment"><code>//when we write
+var x = 0;
+//javascript sees
+var x;
+x = 0;</code></pre>
+      </section>
+      <section>
+        <h2>Hoisting</h2>
+        <pre class="fragment"><code>console.log(hoisted); //what happens?</code></pre>
+        <pre class="fragment"><code>console.log(hoisted);
+
+var hoisted = "hi"; //what happens?</code></pre>
+        <pre class="fragment"><code>var hoisted; //declaration hoisted to top of scope
+console.log(hoisted);
+hoisted = "hi";</code></pre>
+<pre class="fragment"><code>function myFunction(){
+  console.log(word)
+  var word = "cake";
+}//what happens when we myFunction()?</code></pre>
+      <aside class="notes">remind function scope</aside>
+      </section>
+      <section>
+        <h2>Function Hoisting</h2>
+        <pre class="fragment"><code>eat();
+
+function eat(){
+  console.log("time to eat cake!")
+} //whole function hoisted</code></pre>
+      <pre class="fragment"><code>eat();
+
+var eat = function() {
+  console.log("time to eat cake!")
+}</code></pre>
+      </section>
+      <section>
+        <h2>Hoisting Danger</h2>
+        <pre class="fragment"><code>var snack = "granola bar";
+function eat(){
+  console.log(snack);
+  var snack = "snickers";
+}
+eat();</code></pre>
+        <p class="fragment">Most problems can be avoided by using good naming and good organization practices, and <code>let</code> and <code>const</code> rather than <code>var</code></p>
+        <aside class="notes">it re-declared var.</aside>
+      </section>
+<section>
+        <h2>XMLHttpRequest (XHR)</h2>
+        <ul>
+          <li class="fragment">Basic (and oldest, hence "XML") JS client/server API.</li>
+          <li class="fragment">Event-based Architecture.</li>
+          <li class="fragment">Built around a request/response object model.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Getting Data with XHR</h2>
+        <p><small>Let's use XHR to explore the Github API. https://developer.github.com/v3/repos/#list-user-repositories</small></p>
+        <pre class="fragment"><code>//type in network tab
+// get new XHR request object
+const req = new HMLHttpRequest()
+// "open" (but don't activate) request
+req.open("GET", 'https://api.github.com/users/octocat/repos')
+// execute the request
+req.send()</code></pre>
+      <aside class="notes">explore network tab, explore gh api a little</aside>
+      </section>
+      <section>
+        <h4>Handling XHR Responses</h4>
+        <pre class="fragment"><code>function showRepositories(event, data) {
+  //"this" = XMLHttpRequest object that fired the event
+  console.log(this);
+  //console.log(this.responseText)
+}
+
+function getRepositories() {
+  const req = new XMLHttpRequest()
+  req.addEventListener("load", showRepositories);
+  //what is showRepositories?
+  req.open("GET", 'https://api.github.com/users/octocat/repos')
+  req.send()
+}</code></pre>
+      <pre class="fragment"><code>function showRepositories(event, data) {
+  console.log(JSON.parse(this.responseText));
+}</code></pre>
+      </section>
+      <section>
+        <h2>XHR Exercise</h2>
+        <p>Using XHR to explore the Github API, write a set of functions that:</p>
+        <ol>
+          <li>Lists all public repositories</li>
+          <li>Lists the first five commits for each repository</li>
+        </ol>
+      </section>
+      <section>
+        <h2>XHR Limitations</h2>
+        <ul>
+          <li>Event model restrictive</li>
+          <li>Very low-level</li>
+          <li>Not natively JSON-aware</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Arrow Functions</h2>
+        <p><small>Arrow functions are an ES6 feature that provides a new syntax and some new behavior to JavaScript functions.</small></p>
+        <pre class="fragment"><code>var arrowFunction = () => {
+  console.log('I was called!')
+}
+
+var regularFunction = function() {
+  console.log('I was called, too!')
+}
+
+arrowFunction() // 'I was called!'
+regularFunction() // 'I was called, too!'</code></pre>
+      </section>
+      <section>
+        <h2>Arrow Functions</h2>
+        <h4>Arguments</h4>
+        <pre class="fragment"><code>var arrowFunction = (arg1, arg2) => {
+  console.log(arg1, arg2)
+}
+
+arrowFunction('Hey,', 'you!') // 'Hey, you!'
+
+//if only one arg, you can leave off the parens
+var singleArgFunction = arg1 => {
+  console.log(arg1)
+}
+
+singleArgFunction("hi!")</code></pre>
+      </section>
+      <section>
+        <h2>Arrow Functions</h2>
+        <h4>Implicit Return</h4>
+        <pre class="fragment"><code>function square(x) {
+  return x*x;
+}
+
+var arrowSquare = n => n*n
+//only with no body block
+
+square(4) // 16
+arrowSquare(4) // 16</code></pre>
+      </section>
+      <section>
+        <h4>Arrow Functions and Promises</h4>
+        <pre class="fragment"><code>order('Shack Burger')
+  .then(function(order) { //order = returned val from order
+    finishedOrder = order.prepare()
+    return finishedOrder //pass this down the chain
+  })
+  .then(function(food) { //food = returned val from last then
+    serve(food)
+  })
+  .catch(function(err) {
+    console.log("oops")
+  })</code></pre>
+  <pre class="fragment"><code>order('Shack Burger')
+  .then(order => order.prepare()) //implicit return
+  .then(food => serve(food))
+  .catch(err => { console.log("oops") })</code></pre>
+      </section>
+      <section>
+        <h2>Which Leads Us To</h2>
+        <pre class="fragment"><code>fetch('https://api.github.com/repos/jquery/jquery/commits')
+  .then(resp => resp.json())
+  .then(json => console.log(json));</code></pre>
+      </section>
+      <section>
+        <h2>Fetch API</h2>
+        <pre><code>fetch('https://api.github.com/repos/jquery/jquery/commits')
+  .then(resp => resp.json())
+  .then(json => console.log(json));</code></pre>
+        <small><ul>
+          <li class="fragment">Built from the ground up to handle modern web needs, like JSON and streaming.</li>
+          <li class="fragment"><code>fetch()</code>is a global function. No making XHR objects.</li>
+          <li class="fragment">Promise-based.</li>
+          <li class="fragment">Body <em>mixin</em> provides parsing.</li>
+          <li class="fragment">Not supported in IE OF COURSE BECAUSE WHY HAVE NICE THINGS</li>
+        </ul></small>
+      </section>
+      <section>
+        <h2>Authenticated Fetch</h2>
+        <pre class="fragment"><code>const token = 'YOUR_TOKEN_HERE'
+fetch('https://api.github.com/user/repos', {
+  headers: {
+    Authorization: `token ${token}`
+  }
+}).then(res => res.json()).then(json => console.log(json));</code></pre>
+      </section>
