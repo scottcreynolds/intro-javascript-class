@@ -16,3 +16,8 @@ app.post('/', function(req,res) {
 app.listen(8888, function() {
   console.log("Hello, Seattle, I'm listening")
 })
+
+$('#asd').on('click', '.selector', function(event) {
+  event.preventDefault();
+  /* Act on the event */
+});

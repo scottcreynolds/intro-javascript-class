@@ -7,6 +7,7 @@ function Track(artist, title) {
 }
 
 let playlist = [
+
   new Track('Springsteen', 'Born to Run'),
   new Track('Pearl Jam', 'Evenflow')
   new Track('Nirvana', 'In Bloom'),
