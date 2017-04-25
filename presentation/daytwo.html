@@ -692,82 +692,13 @@ $(function() {
 el = document.getElementsByClassName('user')[0]
 el.dataset.user</code></pre>
       </section>
-      <section>
-        <h2>Handlebars</h2>
-        <p>Building HTML by hand sucks. Template engines give us a way to dynamically create HTML without having to always do it by hand.</p>
-        <pre class="fragment"><code><main id="main">
-  <a href="#" onclick="loadIssues();">Load Github Issue</a>
-</main>
-&lt;script id="issue-template" type="text/x-handlebars-template"&gt;
-  &lt;article&gt;
-    &lt;header&gt;&lt;h3&gt;Issue #{{number}} ({{state}})&lt;/h3&gt;&lt;/header&gt;
-    &lt;p&gt;{{body}}&lt;/p&gt;
-    &lt;footer&gt;&lt;a href="{{url}}"&gt;created {{created_at}}&lt;/a&gt;&lt;/footer&gt;
-  &lt;/article&gt;
-&lt;/script&gt;</code></pre>
-        <aside class="notes">handlebarsjs.com</aside>
-      </section>
-      <section>
-        <h2>Handlebars</h2>
-        <pre><code>function loadIssue() {
-  var issue = {
-    state: "closed",
-    number: 5,
-    created_at: "2017-03-31 16:23:13 UTC",
-    body: "Instructions say GET but it's a POST"
-  }
-
-  var template = Handlebars.compile(document.getElementById("issue-template").innerHTML);
-  var result = template(issue);
-  document.getElementsByTagName("main")[0].innerHTML += result;
-}</code></pre>
-      <aside class="notes">fake our own data to test before calling api. wire it up and go!</aside>
-      </section>
-      <section>
-        <h2>Handlebars Helpers</h2>
-        <h4>{{each}}</h4>
-        <pre class="fragment"><code><script id="issue-template" type="text/x-handlebars-template">
-  {{#each this}}
-  <article>
-    <header><h3>Issue #{{number}} ({{state}})</h3></header>
-    <p>{{body}}</p>
-    <footer><a href="{{url}}">created {{created_at}}</a></footer>
-  </article>
-  {{/each}}
-</script></code></pre>
-      <pre class="fragment"><code>function loadIssues() {
-  var template = Handlebars.compile(document.getElementById("issue-template").innerHTML);
-  var result = template(issues);
-  document.getElementsByTagName("main")[0].innerHTML += result;
-}</code></pre>
-      <aside class="notes">block-level helper. need # and / to mark start and end like braces or tags</aside>
-      </section>
-      <section>
-        <h2>Handlebars Helpers</h2>
-        <h4>{{if}}</h4>
-        <pre class="fragment"><code><script id="issue-template" type="text/x-handlebars-template">
-  {{#each this}}
-  <article>
-    <header><h3>Issue #{{number}} ({{state}})</h3></header>
-    <p>{{body}}</p>
-    {{#if comments_count}}
-    <p>{{comments_count}} Comments</p>
-    {{else}}
-    <p>No Comments Yet</p>
-    {{/if}}
-    <footer><a href="{{url}}">created {{created_at}}</a></footer>
-  </article>
-  {{/each}}
-</script></code></pre>
-      <aside class="notes">You'll notice this isn't a full expression like you might use in a regular if statement. You can only give if a value from the context object, and if that value evaluates falsy (false, undefined, null, 0, "", or []) then Handlebars won't render the block. In this case, since comments_count is an integer, we can rely on a zero-comments object not rendering this block.</aside>
-      </section>
+      >
       <section>
         <h2>API Lab</h2>
         <p>Go back to the Star Wars API from earlier and let's put this all together.</p>
         <ul>
           <li>Create an HTML page. Add a link to get the list of films. Use jQuery AJAX and display just the list of film titles as links. Think about data attributes!</li>
           <li>When you click the link for a film, retrieve the film's planet and character data and display it on the page.</li>
-          <li>BONUS: Use Handlebars to template your site.</li>
         </ul>
       </section>
       <section>
