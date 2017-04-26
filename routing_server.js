@@ -3,14 +3,14 @@ const request = require('request')
 const port = 8888
 
 function hiHandler(req, res) {
-  response.end("Hi!")
+  res.end("Hi!")
 }
 
-function byeHandler (request,response) {
-  response.end("Bye!")
+function byeHandler (req,res) {
+  res.end("Bye!")
 }
 
-function apiHandler (request, response) {
+function apiHandler (req, res) {
   let opts = {url: 'https://api.github.com/users/octocat/repos',
               headers: {
                 'User-Agent': 'request'
@@ -18,7 +18,7 @@ function apiHandler (request, response) {
               json: true
             }
   request(opts, function(err, resp, body) {
-    response.end(JSON.stringify(body))
+    res.end(JSON.stringify(body))
   })
   // var request = require('request');
   // request('http://www.example.com', function(err, resp, body) {
@@ -26,23 +26,34 @@ function apiHandler (request, response) {
 // });
 }
 
-function requestHandler(request, response) {
-  console.log(request.url)
-  console.log(request.headers)
+function webHandler(req, res) {
+  let site = `https://google.com`
+  request(site, function(err, resp, body) {
+    // res.set('Content-Type', 'text/html');
+    res.end(body)
+  })
+}
+
+function requestHandler(req, res) {
+  console.log(req.url)
+  console.log(req.headers)
   //VERY basic routing handler but this is the gist
-  switch(request.url) {
+  switch(req.url) {
     case "/hi":
       //pass along request and response so we can get data
-      hiHandler(request, response)
+      hiHandler(req, res)
       break
     case "/bye":
-      byeHandler(request, response)
+      byeHandler(req, res)
       break
     case "/api":
-      apiHandler(request, response)
+      apiHandler(req, res)
+      break
+    case "/google":
+      webHandler(req, res)
       break
     default:
-      response.end("Unhandled Route")
+      res.end("Unhandled Route")
   }
   // response.end("\nRequest Complete")
 }
