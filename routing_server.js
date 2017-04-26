@@ -1,47 +1,28 @@
 const http = require("http")
+const request = require('request')
 const port = 8888
-const fetch = require('node-fetch')
-const req = require('request')
 
-const hiHandler = (request, response) => {
-  response.write("Hi!")
+function hiHandler(req, res) {
+  response.end("Hi!")
 }
 
-const byeHandler = (request,response) => {
-  response.write("Bye!")
+function byeHandler (request,response) {
+  response.end("Bye!")
 }
 
-const apiHandler = (request, response) => {
+function apiHandler (request, response) {
   let opts = {url: 'https://api.github.com/users/octocat/repos',
               headers: {
                 'User-Agent': 'request'
               },
               json: true
             }
-  // req(opts).then( data => {
-  //   console.log(data)
-  //   response.write(JSON.stringify(data))
-  // }).catch( err => {
-  //     console.log(err)
-  //   })
-
-  // request.pipe(req(opts, function(err, resp, body) {
-
-    // console.log(err)
-    // console.log(body)
-    // return body
-  // })).pipe(response)
-  // req(opts, function(err, resp, body) {
-  //   console.log(body)
-
-  //   response.end(JSON.stringify(body))
-  // })
-  fetch('https://api.github.com/repos/jquery/jquery/commits')
-   .then(resp => resp.json())
-   .then(json => response.end(JSON.stringify(json)));
+  request(opts, function(err, resp, body) {
+    response.end(JSON.stringify(body))
+  })
 }
 
-const requestHandler = (request, response) => {
+function requestHandler(request, response) {
   console.log(request.url)
   console.log(request.headers)
   //VERY basic routing handler but this is the gist
