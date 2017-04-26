@@ -20,6 +20,10 @@ function apiHandler (request, response) {
   request(opts, function(err, resp, body) {
     response.end(JSON.stringify(body))
   })
+  // var request = require('request');
+  // request('http://www.example.com', function(err, resp, body) {
+    // console.log(body);
+// });
 }
 
 function requestHandler(request, response) {
