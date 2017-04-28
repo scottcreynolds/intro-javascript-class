@@ -1,0 +1,24 @@
+sameroom
+
+web
+- page to list rooms for each chat prog
+- link those rooms togehter (which create webhooks on both platforms)
+- EACH use has to auth it here and say okay
+USE SPARKY
+
+server
+
+- "bot" to listen to messages (webhook calls) from each platform
+- repost from webhook a to chat b, repost from webhook b to chat a
+USE FLINT AND SPARKY
+
+database
+
+- hold references to linked rooms and oauth tokens
+
+
+
+
+app.js controllers
+- /views
+  <html>${{jstemple}}
